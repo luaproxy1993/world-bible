@@ -5,15 +5,17 @@ A world stage document. Maker skills consume it. Pictures: `/world-bible-pack`.
 
 ```
 <slug>/
-  lock.json                 lock (before art)
-  world/world.json          1 world
-  stage/stage.json          2 places / people / factions
-  timeline/timeline.json    3 timeline
-  art/art.json              4 written look (pictures: /world-bible-pack)
-  pack/                     portraits, map, places, props (other skill)
-  play-seeds.json           how it could become a game
-  overview.html             human overview (compiled)
-  WORLD_BIBLE.md            same content as markdown (compiled)
+  lock.json                 one-page agreement
+  world/world.json          primer: the world today
+  play/play.json            who you can be; how trouble works here
+  stage/stage.json          places, people, factions
+  kit/kit.json              gear
+  timeline/timeline.json    older marks + playable stretch
+  art/art.json              written look
+  pack/                     pictures (other skill)
+  play-seeds.json           jobs you could run tonight, not a campaign
+  overview.html             compiled
+  WORLD_BIBLE.md            compiled
 ```
 
 Every story object (place, person, faction, institution, signature, event) uses the same **vignette** shape:
@@ -65,6 +67,14 @@ Every story object (place, person, faction, institution, signature, event) uses 
 
 ---
 
+## 1b · `play/play.json`
+
+| Field | What it is |
+|-------|------------|
+| `roles[]` | Who you can be on this stage. Count: `lock.scale` |
+| `power.street/hard/rare` | Three rungs of how bad a risk gets |
+| `conflict.check/fight/fail` | How you try, how you hurt, what failure costs **here** |
+
 ## 2 · `stage/stage.json`
 
 | Array | Count | What it is |
@@ -73,6 +83,12 @@ Every story object (place, person, faction, institution, signature, event) uses 
 | `people` | `lock.scale` | People as briefs; one `entry_face` |
 | `factions` | `lock.scale` | Who they are this season, where they walk |
 | `institutions` | as needed | Origin of a law, church, license, currency |
+
+## 2b · `kit/kit.json`
+
+| Field | What it is |
+|-------|------------|
+| `gear[]` | Objects a GM can hand out. Count: `lock.scale` |
 
 ---
 

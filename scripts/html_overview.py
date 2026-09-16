@@ -60,7 +60,13 @@ def labels(lang: str) -> dict:
     if zh:
         return {
             "kicker": "World Bible",
-            "nav": ["世界", "舞台", "时间线", "美术"],
+            "nav": ["世界", "怎么玩", "玩具箱", "时间线", "画风"],
+            "roles": "能当谁",
+            "power": "难度",
+            "conflict": "冲突",
+            "gear": "道具",
+            "play": "怎么玩",
+            "box": "玩具箱",
             "feelings": "气质",
             "world": "整体世界",
             "stage": "地点与人物",
@@ -97,7 +103,13 @@ def labels(lang: str) -> dict:
         }
     return {
         "kicker": "World Bible",
-        "nav": ["World", "Stage", "Timeline", "Art"],
+        "nav": ["World", "Play", "Box", "Timeline", "Look"],
+        "roles": "Roles",
+        "power": "Hardness",
+        "conflict": "Conflict",
+        "gear": "Gear",
+        "play": "Play",
+        "box": "Box",
         "feelings": "Temperament",
         "world": "World",
         "stage": "Stage",
@@ -170,6 +182,10 @@ def write_overview(root: Path) -> Path:
     lock = load(root / "lock.json")
     world = load(root / "world" / "world.json")
     stage = load(root / "stage" / "stage.json")
+    play_path = root / "play" / "play.json"
+    kit_path = root / "kit" / "kit.json"
+    play = load(play_path) if play_path.is_file() else {}
+    kit = load(kit_path) if kit_path.is_file() else {}
     timeline = load(root / "timeline" / "timeline.json")
     art = load(root / "art" / "art.json")
     seeds = load(root / "play-seeds.json")
@@ -268,6 +284,34 @@ def write_overview(root: Path) -> Path:
             look_bits.append(f"<p><b>{e(L['look_why'])}.</b> {e(look['why'])}</p>")
     look_html = "\n      ".join(look_bits)
 
+    pwr = play.get("power") or {}
+    conf = play.get("conflict") or {}
+    roles_html = "".join(vignette_html(v, L) for v in play.get("roles") or [])
+    play_block = ""
+    if play:
+        play_block = f"""<section class="ch" id="play">
+  <div class="wrap">
+    <p class="ch-num">01b</p>
+    <h2>{e(L['play'])}</h2>
+    <p class="ch-num">{e(L['power'])}</p>
+    <div class="everyday">
+      <div><h4>street</h4><p>{e(pwr.get('street') or '')}</p></div>
+      <div><h4>hard</h4><p>{e(pwr.get('hard') or '')}</p></div>
+      <div><h4>rare</h4><p>{e(pwr.get('rare') or '')}</p></div>
+    </div>
+    <p class="ch-num">{e(L['conflict'])}</p>
+    <div class="prose">
+      <p><b>check.</b> {e(conf.get('check') or '')}</p>
+      <p><b>fight.</b> {e(conf.get('fight') or '')}</p>
+      <p><b>fail.</b> {e(conf.get('fail') or '')}</p>
+    </div>
+    <p class="ch-num">{e(L['roles'])}</p>
+    <div class="vignettes">{roles_html}</div>
+  </div>
+</section>
+"""
+    gear_html = "".join(vignette_html(v, L) for v in kit.get("gear") or [])
+
     nav = L["nav"]
     html_out = f"""<!DOCTYPE html>
 <html lang="{e(world.get('language') or lock.get('language') or 'en')}">
@@ -282,9 +326,10 @@ def write_overview(root: Path) -> Path:
 <body>
 <nav class="nav">
   <a href="#world">{e(nav[0])}</a>
-  <a href="#stage">{e(nav[1])}</a>
-  <a href="#timeline">{e(nav[2])}</a>
-  <a href="#art">{e(nav[3])}</a>
+  <a href="#play">{e(nav[1])}</a>
+  <a href="#stage">{e(nav[2])}</a>
+  <a href="#timeline">{e(nav[3])}</a>
+  <a href="#art">{e(nav[4])}</a>
 </nav>
 
 <header class="cover">
@@ -323,6 +368,8 @@ def write_overview(root: Path) -> Path:
   </div>
 </section>
 
+{play_block}
+
 <section class="ch" id="stage">
   <div class="wrap">
     <p class="ch-num">02</p>
@@ -341,6 +388,7 @@ def write_overview(root: Path) -> Path:
         <div class="vignettes">{"".join(vignette_html(v, L) for v in stage.get('institutions') or [])}</div>
       </div>
     </div>
+    {("<h3 style='margin:2.5rem 0 0.5rem'>" + e(L['gear']) + "</h3><div class='vignettes'>" + gear_html + "</div>") if gear_html else ""}
   </div>
 </section>
 
@@ -365,6 +413,8 @@ def write_overview(root: Path) -> Path:
       <p><b>{e(L['style'])}.</b> {e(art.get('style_sentence') or '')}</p>
       <p><b>{e(L['light'])}.</b> {e(art.get('light') or '')}</p>
       <p><b>{e(L['medium'])}.</b> {e(art.get('medium') or '')}</p>
+      <p>{e(art.get('wardrobe') or '')}</p>
+      <p>{e(art.get('buildings') or '')}</p>
     </div>
     <div class="palette">{swatches}</div>
     {plates_html(counted)}

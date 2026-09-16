@@ -1,0 +1,15 @@
+{
+  "schema": "doki.world-bible.play",
+  "version": "1.0.0",
+  "roles": [],
+  "power": {
+    "street": "",
+    "hard": "",
+    "rare": ""
+  },
+  "conflict": {
+    "check": "",
+    "fight": "",
+    "fail": ""
+  }
+}

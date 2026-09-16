@@ -34,7 +34,8 @@ WB is upstream of ST worldbook.
 
 ## rpg-campaign-maker
 
-WB is larger than a sitting. Cut a **slice**.
+WB is the **core book**. This skill is one **job** pulled from the box.
+Do not rewrite the core book. Cut a slice: one site, one clock, one fork.
 
 | WB | Campaign |
 |----|----------|

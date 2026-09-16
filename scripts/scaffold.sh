@@ -13,7 +13,7 @@ if [[ -e "$DEST" ]]; then
   exit 1
 fi
 
-mkdir -p "$DEST"/{world,stage,timeline,art/{anchors,look-dev,scenes,people,props,signature},source}
+mkdir -p "$DEST"/{world,play,stage,kit,timeline,art,source,pack}
 rsync -a "$SKILL_ROOT/templates/" "$DEST/"
 
 if command -v sed >/dev/null; then

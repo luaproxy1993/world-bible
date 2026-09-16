@@ -1,24 +1,28 @@
 ---
 name: world-bible
 description: >
-  Turn multimodal seeds into a modular game World Bible — text only
-  (temperament, scale, stage, timeline, art style as prose). Use when the
-  user runs /world-bible, says World Bible, WB, 世界圣经, 世界观设定. Pictures,
-  portraits, maps, and props are /world-bible-pack.
-argument-hint: "[world_path] [new|lock|ingest|world|stage|timeline|art|compile]"
+  Turn multimodal seeds into a TRPG-style core rule book in text: world,
+  who you can be, local conflict, famous faces, places, gear, timeline,
+  written art look. Not a campaign. Use when the user runs /world-bible,
+  says World Bible, WB, 世界圣经, core rule book, CRB, 核心规则书. Campaigns
+  are /rpg-campaign-maker. Pictures are /world-bible-pack.
+argument-hint: "[world_path] [new|lock|ingest|primer|box|timeline|look|compile]"
 user-invocable: true
 metadata:
   short-description: Modular game World Bible generator
-  version: "1.11.0"
+  version: "2.0.0"
   feeds: "doki-game-maker, galgame-maker, rpg-campaign-maker, game-maker-pipeline, world-bible-pack"
 ---
 
 # World Bible
 
-A World Bible is a **text stage document**. It tells a writer and a designer
-what the world is, how long this file covers, who is on stage, what happened,
-and how pictures should look — in words. No pictures here. Portraits, maps,
-and props are `/world-bible-pack`.
+A World Bible is a **core rule book** in text. It is the toy box: the world,
+who you can be, how trouble is resolved here, famous faces, places, gear,
+and a timeline. A GM uses it to run a job. It is **not** a campaign or a
+script. Campaigns are `/rpg-campaign-maker`. Pictures are `/world-bible-pack`.
+
+Same job as a TRPG core book (Cyberpunk 2020, D&D Basic Rules): raw pieces
+to tell a story with, not the story itself.
 
 Default reader: North America / Europe. Default language: **English** in
 every JSON field. Another language only when `lock.json` `language` is set.
@@ -38,6 +42,11 @@ Ordinary words first. The JSON key is in parentheses.
 - The stretch a game occupies (`story_window`)
 - Older facts that still mark today (`world_key`)
 - How pictures should look, in words (`look`)
+- Who you can be on this stage (`roles`)
+- How hard a fight is here (`power`)
+- How people hurt each other and take risks here (`conflict`)
+- The toys: places, faces, gear (`box`)
+- A campaign / one job with a goal (`rpg-campaign-maker`, not this file)
 
 ## Voice
 
@@ -61,9 +70,11 @@ How deep to dig: `references/SPEC.md`. A filled scrap: `references/EXAMPLE.md`.
 intake (script / homage / image / audio / pitch)
   → lock (temperament + story window + signature + look)
   → ingest (quote sources; note what still marks today)
-  → world + stage + timeline (JSON vignettes)
-  → art look (text)
-  → compile (WORLD_BIBLE.md + overview.html from JSON)
+  → primer (world + who you can be + how trouble works)
+  → box (places, people, factions, gear)
+  → timeline
+  → look (text)
+  → compile
 ```
 
 Pictures: `/world-bible-pack` after W6.
@@ -84,19 +95,19 @@ Load on demand:
 ```
 /world-bible
 /world-bible new <slug>
-/world-bible lock | ingest | world | stage | timeline | art | compile
+/world-bible lock | ingest | primer | box | timeline | look | compile
 ```
 
 | Arg | Action |
 |-----|--------|
 | (none) | Read `pipeline_state.json` and continue; else ask intake |
 | `new <slug>` | Scaffold, then **lock** |
-| `lock` | W0 |
-| `ingest` | W1 |
-| `world` | W2 |
-| `stage` | W3 |
-| `timeline` | W4 |
-| `art` | W5 written look only. Text look-dev if `lock.look.source` is `inferred` |
+| `lock` | W0 one-page agreement |
+| `ingest` | W1 quote sources |
+| `primer` or `world` | W2 the world, who you can be, how trouble works |
+| `box` or `stage` | W3 places, people, factions, gear |
+| `timeline` | W4 what still marks today + the playable stretch |
+| `look` or `art` | W5 written look. Text options if look was guessed |
 | `compile` | W6 |
 
 ## Run
@@ -164,7 +175,7 @@ Then `pipeline_state.json`:
 ```json
 {
   "skill": "world-bible",
-  "skill_version": "1.11.0",
+  "skill_version": "2.0.0",
   "slug": "<slug>",
   "step": "W0",
   "status": "in_progress",
@@ -190,26 +201,34 @@ original sentence already captured in the lock)
 
 ---
 
-## W2 · World
+## W2 · Primer (the world and how you play)
 
-**Done when** `world/world.json` answers every World slot in `references/SPEC.md`.
-A new teammate can read it aloud in about four minutes and run a scene.
+**Done when** `world/world.json` and `play/play.json` are filled.
 
-Load `references/SPEC.md` §World. Fill uniqueness, laws (if/then + cost),
-everyday (price, time, or place in each key), and the unique thing as a
-full brief.
+This is the front of a core book: what the world is, who you can be, how
+risky things work here. Not a campaign.
+
+Load `references/SPEC.md` §World and §Play.
+
+- World slots: uniqueness, laws (if/then + cost), everyday, unique thing
+- Play slots: roles, three rungs of hardness, how a check and a fight work
+  **in this world** (tied to the unique thing). Do not paste D&D or
+  Cyberpunk math. Write this box's procedure.
 
 **STOP** — `step W2: accept`
 
 ---
 
-## W3 · Stage
+## W3 · Box (the toys)
 
-**Done when** every place, person, faction, and institution in
-`stage/stage.json` answers **every** slot in `references/SPEC.md` (place,
-person, faction, institution). Counts match `lock.scale`.
+**Done when** `stage/stage.json` and `kit/kit.json` answer every slot in
+`SPEC.md` (place, person, faction, institution, gear). Counts match
+`lock.scale`.
 
-Load `SPEC.md` §Brief and §Stage. Mark the entry face. Relations are ids.
+This is the rest of the core book: rooms, famous faces, groups, and gear
+a GM can pick up tonight. Not a plotted adventure.
+
+Load `SPEC.md` §Brief, §Stage, §Kit. Mark the entry face. Relations are ids.
 
 **STOP** — `step W3: accept`
 
@@ -288,7 +307,7 @@ load:
   - {SKILL_ROOT}/SKILL.md
   - {WORLD}/pipeline_state.json, lock.json, world/world.json   (if they exist)
   - {SKILL_ROOT}/references/INGEST.md     at W1 or when intake is not a sentence
-  - {SKILL_ROOT}/references/SPEC.md       at W2–W4 and W6
+  - {SKILL_ROOT}/references/SPEC.md       at W2–W4 and W6 (primer, box, timeline)
   - {SKILL_ROOT}/references/ART.md        at W5 (text look)
   - {SKILL_ROOT}/references/HANDOFF.md    when a downstream skill is named
   - {SKILL_ROOT}/references/CANON.md      when prose goes generic

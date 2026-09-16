@@ -1,6 +1,6 @@
 # World Bible
 
-Text-only stage document for a game world: temperament, scale, stage, timeline, written art look.
+A **TRPG core rule book** in text: the world, who you can be, how trouble works here, faces, places, gear, timeline, written look. Not a campaign.
 
 ```text
 /world-bible
@@ -25,7 +25,7 @@ npx skills add luaproxy1993/world-bible -y
 
 Update: same command, or `git -C ~/.grok/skills/world-bible pull`.
 
-Current: **1.11.0**.
+Current: **2.0.0**.
 
 ## New world
 

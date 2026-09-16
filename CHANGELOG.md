@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.0
+
+This file is a **core rule book**, not a campaign.
+
+- Primer (`world/` + `play/`): the world today, who you can be, three rungs of hardness, how a check and a fight work **here**.
+- Box (`stage/` + `kit/`): places, famous faces, groups, gear.
+- Timeline, written look, compile stay.
+- A plotted job is `/rpg-campaign-maker`. Pictures are `/world-bible-pack`.
+- Same chapter job as Cyberpunk 2020 / D&D Basic Rules: toys to tell a story with.
+
 ## 1.11.0
 
 - Ordinary words first. Working names (`lock`, `residue`, `signature`, `sitting`) are defined in SKILL.md.

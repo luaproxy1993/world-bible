@@ -1,9 +1,14 @@
 # Canon — what to steal
 
-Load when prose goes generic, or when the author names one of these documents.
-Steal *moves*, not worlds.
+This World Bible is a **core rule book**: a toy box. Steal chapter *moves*
+from these books, not their worlds or their math.
 
-These documents are **structure**. Light, wardrobe, and faces follow the lock.
+A core book has: the world today, who you can be, how a fight works here,
+famous faces, a city tour, gear, a timeline. It does **not** have a plotted
+campaign. That is another book.
+
+Load when prose goes generic, or when the author names one of these documents.
+Light, wardrobe, and faces follow the lock.
 
 ## Cyberpunk Red Core Rulebook
 

@@ -9,14 +9,17 @@ Write `lock.json` at the world root. Empty fields mean the world is not locked.
 
 One bible covers one scale. A season is several sitting bibles, not one fat folder.
 
-| `scale` | Play time | places | people | factions | `story_window` beats |
-|---------|-----------|--------|--------|----------|----------------------|
-| `seed` | 20–40 min | 5–8 | 4–6 | 3–4 | 6–10 |
-| `sitting` | ~3 hours | 10–16 | 8–12 | 4–6 | 14–22 |
+| `scale` | Play time | places | people | factions | roles | gear | window beats |
+|---------|-----------|--------|--------|----------|-------|------|--------------|
+| `seed` | 20–40 min | 5–8 | 4–6 | 3–4 | 3–5 | 5–8 | 6–10 |
+| `sitting` | ~3 hours | 10–16 | 8–12 | 4–6 | 5–8 | 8–16 | 14–22 |
 
-Counts are inclusive ranges. W3 / W4 must land inside the locked scale. `world_key` is residue history (as many as leave a mark). The 3-hour script hangs on `story_window`, not on `world_key`.
+This file is a **core rule book**: toys to run a job. It is not a campaign.
+A campaign is a later pack (`/rpg-campaign-maker`) that picks toys from this box.
 
-A vignette is a brief, not a scene script. Volume is more rooms, faces, and beats — not longer bodies.
+Counts are inclusive. `world_key` is older facts that still mark today. The
+playable stretch hangs on `story_window`. Briefs stay briefs; volume is more
+toys, not longer essays.
 
 ## Look
 

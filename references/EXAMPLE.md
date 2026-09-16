@@ -47,4 +47,11 @@ Sister Cald keeps the Abbey stamps at the hymn-house desk from first bell to dus
 
 This winter's beat: the pot cracked at the North Try-Pots after the third stranding. Sister Cald was on the desk. Unstamped flasks went into the alley glow. House lamps still depend on that yard.
 
-Voice note: this is as fancy as the prose should get. Answer the slots. Do not write a diary.
+## Play (excerpt)
+
+**Role:** Flask clerk. You stand at the hymn-house desk. Only you can sell an Abbey stamp. Lamp-oil in a sealed flask without your stamp is illegal. Last month you buried a dock name in the book.
+
+**Street risk:** a stuck unpaid door; a night in the cellar if the flask is unstamped.
+**Fight here:** an open kettle is public light; a sealed flask is a weapon and a crime. No hit points from another game.
+
+Voice note: this is as fancy as the prose should get. Answer the slots. Do not write a diary. Do not write a campaign.

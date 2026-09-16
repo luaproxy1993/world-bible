@@ -89,7 +89,46 @@ A teammate reads this aloud in about four minutes and can run a scene.
 | `signature` | A brief (same slots as above). Procedure: how you get it, how you use it, how it fails. |
 | `slang[]` | Optional. About 12 terms. `term` in local speech, `meaning` in ordinary English. |
 
-Out: creation myths with no mark on today, other continents, system math.
+Out: creation myths with no mark on today, other continents, generic D20 math.
+
+---
+
+## Play (`play/play.json`)
+
+How this core book lets you **be someone** and **take a risk**. Tied to
+this world's unique thing. Not a pasted combat chapter from another game.
+
+```json
+{
+  "schema": "doki.world-bible.play",
+  "version": "1.0.0",
+  "roles": [],
+  "power": {
+    "street": "what a street-level risk does to a body or a plan",
+    "hard": "what a mill, yard, or official room does",
+    "rare": "what a hall, temple, or last-car fight does"
+  },
+  "conflict": {
+    "check": "how you try something risky here (one procedure)",
+    "fight": "how people hurt each other here, using the unique thing",
+    "fail": "what failure costs this year"
+  }
+}
+```
+
+Role brief slots (every `roles[]` item, same vignette shape, `kind: role`):
+
+1. Who you are on this stage, in one sentence.
+2. Where you stand (`place.*`).
+3. What only this role can do here.
+4. How the unique thing helps or blocks you.
+5. One dated incident.
+
+`power` each rung: 3–6 sentences with a concrete example from this world.
+`conflict` each key: 4–8 sentences. A GM can run a scuffle from this page
+without opening another book.
+
+Do not invent hit points, classes, or netrunning unless this world has them.
 
 ---
 
@@ -99,6 +138,31 @@ Counts: `lock.scale` in `LOCK.md`. Every item is a brief with **all** slots fill
 
 A place names who uses it. A person names where they stand. A faction names
 the streets it walks this year.
+
+---
+
+## Kit (`kit/kit.json`)
+
+Gear a GM can hand a player tonight. The unique thing is here too if it
+is an object. Not a shopping catalog from another game.
+
+```json
+{
+  "schema": "doki.world-bible.kit",
+  "version": "1.0.0",
+  "gear": []
+}
+```
+
+Each `gear[]` item is a brief (`kind: gear`). Slots:
+
+1. What it is, in one sentence.
+2. Who owns or sells it (`person.*` or `place.*`).
+3. What it costs, or that it is free / stolen / stamped.
+4. How the unique thing interacts with it (fails, lights, opens).
+5. One dated use.
+
+Counts: `lock.scale` in `LOCK.md`.
 
 ---
 

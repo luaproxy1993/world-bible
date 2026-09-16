@@ -38,6 +38,10 @@ def main(root: Path) -> None:
     lock = load(root / "lock.json")
     world = load(root / "world" / "world.json")
     stage = load(root / "stage" / "stage.json")
+    play_path = root / "play" / "play.json"
+    kit_path = root / "kit" / "kit.json"
+    play = load(play_path) if play_path.is_file() else {}
+    kit = load(kit_path) if kit_path.is_file() else {}
     timeline = load(root / "timeline" / "timeline.json")
     art = load(root / "art" / "art.json")
     seeds = load(root / "play-seeds.json")
@@ -107,6 +111,31 @@ def main(root: Path) -> None:
             }
     out += ["", "### Signature", "", vignette_md(sig) if sig else ""]
 
+    if play:
+        out += ["---", "", "## Play (who you can be, how trouble works)", ""]
+        pwr = play.get("power") or {}
+        conf = play.get("conflict") or {}
+        out += [
+            "### Hardness",
+            "",
+            f"- **street:** {pwr.get('street', '')}",
+            f"- **hard:** {pwr.get('hard', '')}",
+            f"- **rare:** {pwr.get('rare', '')}",
+            "",
+            "### Conflict",
+            "",
+            f"- **check:** {conf.get('check', '')}",
+            "",
+            f"- **fight:** {conf.get('fight', '')}",
+            "",
+            f"- **fail:** {conf.get('fail', '')}",
+            "",
+            "### Roles",
+            "",
+        ]
+        for v in play.get("roles") or []:
+            out.append(vignette_md(v))
+
     out += ["---", "", "## 2 · Stage", "", "### Places", ""]
     for v in stage.get("places") or []:
         out.append(vignette_md(v))
@@ -119,6 +148,11 @@ def main(root: Path) -> None:
     out += ["### Institutions", ""]
     for v in stage.get("institutions") or []:
         out.append(vignette_md(v))
+
+    if kit.get("gear"):
+        out += ["### Gear", ""]
+        for v in kit.get("gear") or []:
+            out.append(vignette_md(v))
 
     out += [
         "---",
