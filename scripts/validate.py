@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -56,6 +57,19 @@ CALENDAR_KEYS = ("day", "week", "clock", "curfew")
 TRAVEL_KEYS = ("how", "times", "stop")
 CONFLICT_KEYS = ("check", "fight", "fail")
 POWER_KEYS = ("street", "hard", "rare")
+ID_IN_PROSE = re.compile(
+    r"\b(?:place|person|faction|law|signature|opposition|role|gear|"
+    r"institution|event|job)\.[a-z0-9-]+",
+    re.I,
+)
+PROSE_KEYS = {
+    "body", "residue", "play_hook", "uniqueness", "text",
+    "street", "hard", "rare", "check", "fight", "fail",
+    "eat", "pay", "move", "sleep", "die", "news",
+    "day", "week", "clock", "curfew", "how", "times", "stop",
+    "fork", "caption",
+    "currency", "street_wage", "skilled_wage", "bread", "room", "fine",
+}
 # Relation prefixes this book mints. Unknown prefixes (old `law.*` without ids) are ignored.
 MINTED_PREFIXES = (
     "place", "person", "faction", "institution", "signature", "event",
@@ -151,6 +165,25 @@ def check_relations(errors: list[str], items: object, ids: set[str], label: str)
         subject_id = item.get("subject_id")
         if missing_id(subject_id or "", ids):
             errors.append(f"{label} `{iid}` subject_id `{subject_id}` is not an id in this book")
+
+
+def check_speech(errors: list[str], obj: object, path: str = "") -> None:
+    """Readable fields use human names. Dotted ids belong in relations/site/cast."""
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            here = f"{path}.{key}" if path else key
+            if key in PROSE_KEYS and isinstance(value, str):
+                found = ID_IN_PROSE.search(value)
+                if found:
+                    errors.append(
+                        f"{here} has dotted id `{found.group(0)}` — "
+                        "write a human name; put the id in relations"
+                    )
+            else:
+                check_speech(errors, value, here)
+    elif isinstance(obj, list):
+        for i, item in enumerate(obj):
+            check_speech(errors, item, f"{path}[{i}]")
 
 
 def require_map(errors: list[str], obj: dict, keys: tuple[str, ...], prefix: str) -> None:
@@ -369,6 +402,12 @@ def main(root: Path) -> int:
 
     art = loaded.get("art/art.json") or {}
     check_relations(errors, art.get("subjects"), ids, "subjects")
+
+    if scale:
+        for rel, blob in loaded.items():
+            if rel == "lock.json":
+                continue
+            check_speech(errors, blob, rel)
 
     if errors:
         print("FAIL")

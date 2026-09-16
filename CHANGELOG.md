@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.2.0
+
+Readable fields speak English. Dotted ids (`place.salt-lamp`) belong in
+`relations`, not in `body`. First local word in a brief is glossed in that
+sentence. Validate fails a core book that dumps ids into prose.
+
 ## 3.1.0
 
 The skill's name is **Core Rule Book**. Slash command: `/core-rule-book`.

@@ -36,7 +36,7 @@ Not a wiki card. Not a short story.
   "body": "core: 280–500 words. sitting: 220–400. seed: 150–250. Answer every slot below.",
   "residue": "what this still does to people in the playable present",
   "relations": ["person.", "signature."],
-  "play_hook": "one scene a designer can run tomorrow, using only ids in this book"
+  "play_hook": "one scene a designer can run tomorrow, in English names"
 }
 ```
 
@@ -45,8 +45,11 @@ Not a wiki card. Not a short story.
 still works, it is too generic. Rewrite.
 **Hook test.** A designer can start a scene without inventing a new room or person.
 **Voice test.** SKILL.md Voice. If you reread it, look up a word, or it reads
-as a diary, rewrite.
+as a diary or a database dump, rewrite.
 **Id test.** Every name in `relations` exists in this book's JSON.
+**Speech test.** `body`, `residue`, and `play_hook` contain no dotted ids
+(`place.` `person.` `faction.` `law.`). Human names in the brief; ids in
+`relations`.
 
 Entry face: exactly one `person.*` in `world.json` → `entry_face`.
 
@@ -58,17 +61,17 @@ Entry face: exactly one `person.*` in `world.json` → `entry_face`.
 4. A price, a ticket, a stamp, or a free rule. Use `play.economy` currency.
 5. How the unique thing (`signature`) shows up in this room.
 6. One dated incident (year or season) that proves a Law.
-7. Which other ids you can walk to from here.
+7. Which other **places** you can walk to from here (human names; ids in `relations`).
 8. What a player can take, copy, or overhear here (one concrete thing).
 
 ### Person slots (every `people[]` item)
 
 1. Name, age, job.
-2. Where they stand on a normal day (a `place.*` id).
+2. Where they stand on a normal day (name the place; put `place.*` in `relations`).
 3. What they can give, sell, stamp, or refuse.
 4. How the unique thing touches them (bag, body, pay, door).
 5. One dated incident.
-6. Who they deal with (ids, not adjectives).
+6. Who they deal with (human names, not adjectives; ids in `relations`).
 7. What they want this season (a thing a player can give, steal, or block).
 8. Leverage a player can use (debt, stamp, secret, or a relation id).
 
@@ -264,7 +267,7 @@ are the proof this folder is a core book, not one campaign.
   "clock": "what runs out this sitting",
   "fork": "the choice that splits two later playthroughs",
   "cast": ["person."],
-  "body": "4–8 sentences. Only ids in this book."
+  "body": "4–8 sentences. Human names. Ids live in site and cast."
 }
 ```
 

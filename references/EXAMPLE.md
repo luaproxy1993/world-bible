@@ -50,7 +50,7 @@ This winter's beat: the pot cracked at the North Try-Pots after the third strand
 
 ## Play (excerpt)
 
-**Role:** Flask clerk. You stand at the hymn-house desk. Only you can sell an Abbey stamp. Lamp-oil in a sealed flask without your stamp is illegal. Last month you buried a dock name in the book.
+**Role:** Flask clerk. You stand at the hymn-house desk. Only you can sell an Abbey stamp. Lamp-oil — the oil cooked from stranded sea animals — in a sealed flask without your stamp is illegal. Last month you buried a dock name in the book. Write “Sister Cald,” not `person.sister-cald`.
 
 **Street risk:** a stuck unpaid door; a night in the cellar if the flask is unstamped.
 **Fight here:** an open kettle is public light; a sealed flask is a weapon and a crime. No hit points from another game.

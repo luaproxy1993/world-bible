@@ -12,7 +12,7 @@ argument-hint: "[world_path] [new|lock|ingest|primer|box|timeline|look|compile]"
 user-invocable: true
 metadata:
   short-description: Modular game core rule book generator
-  version: "3.1.0"
+  version: "3.2.0"
   feeds: "doki-game-maker, galgame-maker, rpg-campaign-maker, game-maker-pipeline, world-bible-pack"
 ---
 
@@ -64,18 +64,32 @@ Ordinary words first. The JSON key is in parentheses.
 
 ## Voice
 
-Write like a manual. A production assistant can use every sentence tomorrow.
-An average US adult understands it on the first read.
+Write like a manual a coworker can use tomorrow. An average US adult
+understands every sentence on the first read.
 
-- Complete sentences that chain facts. Do not stack fragments.
+- Complete sentences that chain facts.
 - Common words. If a high-schooler would look it up, cut it — unless it is a
-  local name glossed in that same sentence.
+  local name **glossed in that same sentence**.
 - Say the thing in English first. Then the local name, once.
-- State the rule, the room, who uses it, and what breaks. No interior thought.
-- Feeling names are ordinary adjectives a stranger already knows: Wet, Official,
-  Hungry.
+- State the job, the room, who uses it, and what breaks.
+- Feeling names are ordinary adjectives: Wet, Official, Hungry.
 
-If a paragraph could be a diary, rewrite it as instructions.
+**Ids stay in the JSON keys.** Readable fields (`body`, `residue`,
+`play_hook`, law `text`, everyday, job `body`) use human names: Mira Calder,
+the Salt Lamp, the Harbor 6 claims floor. Never write `place.salt-lamp` or
+`person.nils-helix` in those fields. Put the dotted id in `relations`,
+`site`, or `cast`.
+
+**Gloss once per brief.** First time a local word appears, say what it is
+in ordinary English in that sentence. Then you may use the short name.
+
+Wrong: *You claw back stamps at place.adjuster-floor. Person.nils-helix signed.*
+Right: *You work claims for Helix Mutual, the company that bottles Draught
+(the red stuff that feeds the Long and runs night chrome). Your desk is the
+claims floor on Harbor 6. Nils Helix signed the paper.*
+
+If a paragraph could be a diary, or if it reads like a database, rewrite it
+as instructions.
 
 This is a style rule. Structure moves live in `references/CANON.md`.
 How deep to dig: `references/SPEC.md`. A filled scrap: `references/EXAMPLE.md`.
@@ -194,7 +208,7 @@ Then `pipeline_state.json`:
 ```json
 {
   "skill": "core-rule-book",
-  "skill_version": "3.1.0",
+  "skill_version": "3.2.0",
   "slug": "<slug>",
   "step": "W0",
   "status": "in_progress",
@@ -319,8 +333,9 @@ them; do not start that skill's pipeline unless they asked.
 ## Quality bar
 
 1. A teammate can quote the about-sentence, the three feelings, and the look
-   why. An average American can read any paragraph once and know what it said.
-   Manual voice. No fragment stacks. No unglossed coinage.
+   why. An average American can read any paragraph once and know what the
+   person *does for a living*, where they stand, and what they can refuse.
+   No dotted ids in readable fields. No unglossed coinage.
 2. Every brief answers its SPEC slots. Swap the names; if it still works, rewrite.
 3. Every older fact still does something to people in the playable present.
 4. The signature is mechanically touchable.
