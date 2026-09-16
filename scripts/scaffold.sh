@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Scaffold a world-bible folder (four JSON folders).
+# Scaffold a world-bible folder (core rule book JSON).
 # Usage: scaffold.sh <slug> [parent_dir]
 set -euo pipefail
 SKILL_ROOT="$(cd "$(dirname "$0")/.." && pwd)"

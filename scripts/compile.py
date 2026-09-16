@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile WORLD_BIBLE.md and overview.html from JSON folders."""
+"""Compile WORLD_BIBLE.md and overview.html from the core-book JSON."""
 from __future__ import annotations
 
 import json
@@ -99,6 +99,18 @@ def main(root: Path) -> None:
     for k in ("eat", "pay", "move", "sleep", "die", "news"):
         if everyday.get(k):
             out.append(f"- **{k}:** {everyday[k]}")
+    calendar = world.get("calendar") or {}
+    if any(calendar.get(k) for k in ("day", "week", "clock", "curfew")):
+        out += ["", "### Calendar", ""]
+        for k in ("day", "week", "clock", "curfew"):
+            if calendar.get(k):
+                out.append(f"- **{k}:** {calendar[k]}")
+    travel = world.get("travel") or {}
+    if any(travel.get(k) for k in ("how", "times", "stop")):
+        out += ["", "### Travel", ""]
+        for k in ("how", "times", "stop"):
+            if travel.get(k):
+                out.append(f"- **{k}:** {travel[k]}")
     sig = world.get("signature") or {}
     if not (sig.get("body") or sig.get("title")):
         ls = lock.get("signature") or {}
@@ -130,9 +142,19 @@ def main(root: Path) -> None:
             "",
             f"- **fail:** {conf.get('fail', '')}",
             "",
-            "### Roles",
-            "",
         ]
+        eco = play.get("economy") or {}
+        if any(eco.get(k) for k in ("currency", "street_wage", "skilled_wage", "bread", "room", "fine")):
+            out += ["### Economy", ""]
+            for k in ("currency", "street_wage", "skilled_wage", "bread", "room", "fine"):
+                if eco.get(k):
+                    out.append(f"- **{k}:** {eco[k]}")
+            out.append("")
+        if play.get("opposition"):
+            out += ["### Opposition", ""]
+            for v in play.get("opposition") or []:
+                out.append(vignette_md(v))
+        out += ["### Roles", ""]
         for v in play.get("roles") or []:
             out.append(vignette_md(v))
 
@@ -201,6 +223,24 @@ def main(root: Path) -> None:
     art_head += [
         f"**Style:** {art.get('style_sentence', '')}",
         f"**Medium:** {art.get('medium', '')}",
+        f"**Light:** {art.get('light', '')}",
+        "",
+    ]
+    if art.get("wardrobe"):
+        art_head += [f"**Wardrobe:** {art.get('wardrobe')}", ""]
+    if art.get("buildings"):
+        art_head += [f"**Buildings:** {art.get('buildings')}", ""]
+    if art.get("crowd"):
+        art_head += [f"**Crowd:** {art.get('crowd')}", ""]
+    if art.get("motif"):
+        art_head += ["**Motif:**"]
+        for m in art.get("motif") or []:
+            if isinstance(m, dict):
+                art_head.append(f"- {m.get('name', '')} — {m.get('where', '')}")
+            else:
+                art_head.append(f"- {m}")
+        art_head.append("")
+    art_head += [
         "",
         "| id | kind | ratio | title | path |",
         "|----|------|-------|-------|------|",
@@ -216,11 +256,23 @@ def main(root: Path) -> None:
             out += [f"### {p.get('title') or p.get('id')}", "", p["caption"], ""]
 
     doki = seeds.get("doki") or {}
+    out += ["---", "", "## Play-seeds", ""]
+    if seeds.get("jobs"):
+        out += ["### Jobs", ""]
+        for job in seeds.get("jobs") or []:
+            if not isinstance(job, dict):
+                continue
+            out += [
+                f"#### {job.get('title') or job.get('id')}",
+                "",
+                f"- **site:** `{job.get('site') or ''}`",
+                f"- **clock:** {job.get('clock') or ''}",
+                f"- **fork:** {job.get('fork') or ''}",
+                "",
+                job.get("body") or "",
+                "",
+            ]
     out += [
-        "---",
-        "",
-        "## Play-seeds",
-        "",
         f"**FMV:** {seeds.get('fmv', '')}",
         "",
         f"**RPG:** {seeds.get('rpg', '')}",

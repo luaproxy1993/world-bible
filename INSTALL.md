@@ -1,4 +1,4 @@
-# Install — world-bible v2.0.0
+# Install — world-bible v3.0.0
 
 ## The one command
 
@@ -46,8 +46,10 @@ cat ~/.grok/skills/world-bible/VERSION
 
 Then in the agent: `/world-bible`.
 
-Pictures (separate skill):
+Pictures are a later session (separate skill):
 
 ```bash
 npx skills add luaproxy1993/world-bible-pack -y
 ```
+
+A plotted sitting is `/rpg-campaign-maker`, not this skill.

@@ -9,7 +9,7 @@ Feelings: **Wet, Official, Risky.**
 About: *This world is about a city that burns oil cooked from stranded sea animals.*
 The unique thing: **lamp-oil** — it lights houses, runs machines, and the church controls the stamps on the bottles.
 Window: one winter in **Marrowport**, after the third mass stranding.
-How long: `seed`.
+How long: `seed` (this page is a scrap; a real book is `core`).
 Look: `oil-box`. Why: wet harbor and tallow light read as painted box art.
 
 ## World — Laws (excerpt)
@@ -33,6 +33,7 @@ The North Try-Pots is the yard that supplies house lamps for Marrowport. Workers
 ### Sister Cald, 44, keeps the stamps
 
 Sister Cald keeps the Abbey stamps at the hymn-house desk from first bell to dusk. She was a dock clerk before the Abbey took the oil. Every flask is a line in a book that smells of fish glue. Her right glove is always dark. She can sell a stamp, refuse a stamp, or hide a name in the book. She does not take money. She takes a name. Lamp-oil touches her every hour: legal oil in the desk lamp, illegal oil in the lamp she reads by after dusk because it burns steadier. That second lamp is how you know she will deal. Last month she stamped a flask for a dock name she later buried in the book.
+This season she wants the cracked pot recorded as an accident, not a theft. The leverage is the second lamp: if you name it at the desk, she will deal.
 
 - **What this still does:** stamps can be faked if you know her price
 - **Ids:** `faction.abbey` `signature.lamp-oil` `place.north-try-pots`
@@ -54,4 +55,10 @@ This winter's beat: the pot cracked at the North Try-Pots after the third strand
 **Street risk:** a stuck unpaid door; a night in the cellar if the flask is unstamped.
 **Fight here:** an open kettle is public light; a sealed flask is a weapon and a crime. No hit points from another game.
 
-Voice note: this is as fancy as the prose should get. Answer the slots. Do not write a diary. Do not write a campaign.
+**Economy:** dock tokens. Street wage two tokens a day. A day's flask two tokens with a stamp. A hymn-house bed one token. An unstamped flask costs a night in the cellar, not a fine in coin.
+
+**Opposition:** Abbey door-watch. They stand at the hymn-house. They hurt you by seizing unstamped flasks. Street rung. Last week they took a corkless flask off a child at the alley gate.
+
+**Job:** The cracked pot. Site `place.north-try-pots`. Clock: the alley glow dies at dawn. Fork: report the crack as accident, or as theft. Cast: Sister Cald. Not a campaign — one sitting a later author could cut.
+
+Voice note: this is as fancy as the prose should get. Answer the slots. Do not write a diary. Do not write a campaign. A `core` book has many more toys than this scrap.

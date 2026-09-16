@@ -1,31 +1,33 @@
 # World Bible · field sheet
 
-One folder = one world. Canonical text is **JSON**. Default language **English**.
-A world stage document. Maker skills consume it. Pictures: `/world-bible-pack`.
+One folder = one core rule book. Canonical text is **JSON**. Default
+language **English**. Maker skills consume it. Pictures: `/world-bible-pack`.
+A plotted job: `/rpg-campaign-maker`. Line: `PIPELINE.md`.
 
 ```
 <slug>/
   lock.json                 one-page agreement
-  world/world.json          primer: the world today
-  play/play.json            who you can be; how trouble works here
-  stage/stage.json          places, people, factions
+  world/world.json          the world today, calendar, travel
+  play/play.json            who you can be; economy; conflict; opposition
+  stage/stage.json          places, people, factions, institutions
   kit/kit.json              gear
   timeline/timeline.json    older marks + playable stretch
-  art/art.json              written look
-  pack/                     pictures (other skill)
-  play-seeds.json           jobs you could run tonight, not a campaign
+  art/art.json              written look (no pictures)
+  pack/                     pictures (other skill, later session)
+  play-seeds.json           three jobs you could run, not a campaign
   overview.html             compiled
   WORLD_BIBLE.md            compiled
 ```
 
-Every story object (place, person, faction, institution, signature, event) uses the same **vignette** shape:
+Every story object (place, person, faction, institution, signature, event,
+role, gear, opposition) uses the same **vignette** shape:
 
 | Field | What it is |
 |-------|------------|
 | `id` | Stable id (`place.north-try-pots`, `person.sister-cald`) |
-| `kind` | `place` / `person` / `faction` / `institution` / `signature` / `event` |
+| `kind` | `place` / `person` / `faction` / `institution` / `signature` / `event` / `role` / `gear` / `opposition` / `job` |
 | `title` | Name + role + when |
-| `body` | sitting 220–400 words. Answers every slot in `SPEC.md` |
+| `body` | core 280–500 words. Answers every slot in `SPEC.md` |
 | `residue` | What this still does to people now |
 | `relations` | Other ids, not adjectives |
 | `play_hook` | One scene a designer can run tomorrow |
@@ -43,7 +45,7 @@ Every story object (place, person, faction, institution, signature, event) uses 
 | `temperament.about` | One sentence: this world is about X |
 | `story_window` | `era`, `start`, `playable_present`, `stop` |
 | `signature` | The one unique thing you can steal / switch / check (`working_name`, `everyday`, `play`) |
-| `scale` | `seed` (20–40 min) or `sitting` (~3 hours). Counts in `LOCK.md`. Default `sitting` |
+| `scale` | `seed` (pitch), `sitting` (one district), **`core`** (default CRB). Counts in `LOCK.md` |
 | `look` | Paint school from intake: `school` `named_as` `why` `forbidden[]` `source` (`author` / `inferred`). Schools in `ART.md` |
 | `timeline_shape` | `linear` / `cyclic` / `concurrent` |
 | `worldlines` | Timeline tracks; one is `canonical` |
@@ -58,8 +60,10 @@ Every story object (place, person, faction, institution, signature, event) uses 
 | `uniqueness` | What makes this stage this world |
 | `temperament` | Same three feelings, written as lived atmosphere |
 | `window` | When we are; where the story stops |
-| `laws[]` | 3–7 local rules that **are** gameplay |
+| `laws[]` | Local rules that **are** gameplay |
 | `everyday` | `eat` `pay` `move` `sleep` `die` `news` |
+| `calendar` | `day` `week` `clock` `curfew` |
+| `travel` | `how` `times` `stop` — named place to named place |
 | `signature` | Full vignette of the unique thing |
 | `slang[]` | Optional, ~12 terms (`term` / `meaning`) |
 | `entry_face` | Id of the face on the card |
@@ -74,21 +78,23 @@ Every story object (place, person, faction, institution, signature, event) uses 
 | `roles[]` | Who you can be on this stage. Count: `lock.scale` |
 | `power.street/hard/rare` | Three rungs of how bad a risk gets |
 | `conflict.check/fight/fail` | How you try, how you hurt, what failure costs **here** |
+| `economy` | `currency` `street_wage` `skilled_wage` `bread` `room` `fine` |
+| `opposition[]` | Who can hurt you this window. Count: `lock.scale` |
 
 ## 2 · `stage/stage.json`
 
 | Array | Count | What it is |
 |-------|-------|------------|
 | `places` | `lock.scale` | Locations as briefs |
-| `people` | `lock.scale` | People as briefs; one `entry_face` |
-| `factions` | `lock.scale` | Who they are this season, where they walk |
-| `institutions` | as needed | Origin of a law, church, license, currency |
+| `people` | `lock.scale` | People as briefs; one `entry_face`; each has a want and leverage |
+| `factions` | `lock.scale` | Who they are this season, where they walk, who they oppose |
+| `institutions` | `lock.scale` | Origin of a law, church, license, currency |
 
 ## 2b · `kit/kit.json`
 
 | Field | What it is |
 |-------|------------|
-| `gear[]` | Objects a GM can hand out. Count: `lock.scale` |
+| `gear[]` | Objects a GM can hand out. Count: `lock.scale`. Prices use `play.economy` |
 
 ---
 
@@ -101,7 +107,7 @@ Every story object (place, person, faction, institution, signature, event) uses 
 | `world_key[]` | History that still marks the present |
 | `story_window[]` | The stretch a game occupies. Beat count: `lock.scale` |
 
-Each event: `id` `when` `title` `residue` `relations` `body` (2–4 sentences).  
+Each event: `id` `when` `title` `residue` `relations` `body` (4–7 sentences).
 Concurrent extras: `worldline`, optional `comparison[]`.
 
 ---
@@ -115,16 +121,19 @@ Concurrent extras: `worldline`, optional `comparison[]`.
 | `light` | Who lights a street and a room |
 | `wardrobe` | Work clothes and after-hours clothes |
 | `buildings` | Wood, brick, stone, glass |
+| `crowd` | A street of people at noon |
+| `motif[]` | Recurring objects a later pack repeats (`name` `where`) |
 | `medium` | Stem for `lock.look.school` (`ART.md`) |
 | `look_dev[]` | Text candidates when look is inferred. Different schools |
-| `subjects[]` | Optional captions for `/world-bible-pack`. Else the pack reads stage |
+| `subjects[]` | Captions for `/world-bible-pack`. Required at core |
 
 ---
 
-## `play-seeds.json` — hooks
+## `play-seeds.json` — hooks + jobs
 
 | Field | What it is |
 |-------|------------|
+| `jobs[]` | Proof the box can yield later campaigns. Count: `lock.scale`. Each: `site` `clock` `fork` `cast` |
 | `fmv` | Which vignettes become episodes |
 | `rpg` | One sitting: where it starts/stops, what a check is |
 | `tcg` | Factions as colors, signature as cards |

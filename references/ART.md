@@ -45,8 +45,10 @@ Default when intake does not name a look: `oil-box`.
 | `light` | Who lights a street and a room. 3–6 sentences. |
 | `wardrobe` | 80–150 words. Work clothes and after-hours clothes. |
 | `buildings` | 80–150 words. Wood, brick, stone, glass. |
+| `crowd` | 40–80 words. A street of people at noon. |
+| `motif[]` | Recurring objects a later pack must repeat. Count: `LOCK.md`. |
 | `look_dev[]` | Three written options when the look was guessed. Different schools. |
-| `subjects[]` | Optional captions for `/world-bible-pack`. |
+| `subjects[]` | Captions for `/world-bible-pack`. Required at **core**. Count: `LOCK.md`. |
 
 No image paths. No `generated` flag. `/world-bible-pack` writes `pack/`.
 
@@ -57,9 +59,10 @@ write **three** `look_dev` rows. Each row a **different school**. Same
 location described in one sentence. **STOP** for `look-dev: pick <school>`.
 Then write `lock.look` (`source` becomes `author`) and the law fields.
 
-## Subjects (optional)
+## Subjects
 
-A subject is a caption, not a file:
+A subject is a caption, not a file. Required at **core**. Optional at
+seed/sitting (the pack can derive from stage). Do not paint them here.
 
 ```json
 {

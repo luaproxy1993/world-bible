@@ -1,21 +1,26 @@
 # World Bible
 
-A **TRPG core rule book** in text: the world, who you can be, how trouble works here, faces, places, gear, timeline, written look. Not a campaign.
+A **TRPG core rule book** in text. Baldur's Gate 1, 2, and 3 sit on one
+D&D core book; this folder is that book. Not a campaign. Not pictures.
 
 ```text
 /world-bible
 /world-bible new <slug>
 ```
 
-JSON in four folders is canonical. Default scale is **sitting** (~3 hours). No pictures.
+JSON is canonical. Default scale is **core** — thick enough that three
+later authors can each cut a different job. No pictures in this skill.
 
-Portraits, maps, and props:
+Production line:
+
+1. `/world-bible` — the core book (this skill). Stops at compile.
+2. `/world-bible-pack` — portraits, map, places, props. Later session.
+3. `/rpg-campaign-maker` — one job from the box. Later session.
 
 ```bash
+npx skills add luaproxy1993/world-bible -y
 npx skills add luaproxy1993/world-bible-pack -y
 ```
-
-Then `/world-bible-pack`.
 
 ## Install
 
@@ -25,7 +30,7 @@ npx skills add luaproxy1993/world-bible -y
 
 Update: same command, or `git -C ~/.grok/skills/world-bible pull`.
 
-Current: **2.0.0**.
+Current: **3.0.0**.
 
 ## New world
 

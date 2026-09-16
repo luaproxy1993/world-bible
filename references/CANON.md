@@ -4,11 +4,26 @@ This World Bible is a **core rule book**: a toy box. Steal chapter *moves*
 from these books, not their worlds or their math.
 
 A core book has: the world today, who you can be, how a fight works here,
-famous faces, a city tour, gear, a timeline. It does **not** have a plotted
-campaign. That is another book.
+wages and prices, who can hurt you, famous faces, a city tour, gear, a
+timeline. It does **not** have a plotted campaign. That is another book
+(`PIPELINE.md`).
 
 Load when prose goes generic, or when the author names one of these documents.
 Light, wardrobe, and faces follow the lock.
+
+## D&D Basic Rules (why Baldur's Gate works)
+
+Moves:
+
+- One core book is the shared substrate. Baldur's Gate 1, 2, and 3 are
+  later stories that pick races, classes, a city, and monsters from that box.
+- Character options, a conflict procedure, a default setting tour, famous
+  names, gear. Not a plotted campaign in the core book.
+- Thick enough that three authors can cut three different stories without
+  inventing a new magic system.
+
+Do not: paste D&D races, classes, hit points, or Forgotten Realms names
+into an original lock.
 
 ## Cyberpunk Red Core Rulebook
 

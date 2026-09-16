@@ -1,6 +1,8 @@
 # Handoff
 
-This skill stops at an accepted World Bible. Named downstream skills consume it. Do not start their pipeline unless the author asked.
+The production line is `PIPELINE.md`. This file is the field map. This
+skill stops at an accepted core rule book. Named downstream skills consume
+it. Do not start their pipeline unless the author asked in this turn.
 
 ## doki-game-maker
 
@@ -34,8 +36,9 @@ WB is upstream of ST worldbook.
 
 ## rpg-campaign-maker
 
-WB is the **core book**. This skill is one **job** pulled from the box.
-Do not rewrite the core book. Cut a slice: one site, one clock, one fork.
+WB is the **core book**. This skill is one **job** pulled from the box
+(see `play-seeds.json` `jobs[]`). Do not rewrite the core book. Cut a
+slice: one site, one clock, one fork. Separate session.
 
 | WB | Campaign |
 |----|----------|
@@ -57,7 +60,8 @@ WB is text. This skill writes `pack/` pictures.
 | `stage.places` | location plates + one playable-window map |
 | `signature` + ordinary objects | props in use |
 
-Do not start `/world-bible-pack` from `/world-bible` unless the author asked.
+Do not start `/world-bible-pack` from `/world-bible` unless the author asked
+in this turn. Pictures are a later session.
 
 ## game-maker-pipeline
 
@@ -77,6 +81,9 @@ A World Bible is content. An App SDK `manifest.json` with `kind: "world"` is a r
 
 ## What stays in the WB folder
 
-`lock.json`, four JSON folders, `source/`, `art/` plates, `play-seeds.json`, compiled `WORLD_BIBLE.md` and `overview.html`.
+`lock.json`, `world/` `play/` `stage/` `kit/` `timeline/` `art/` (text),
+`source/`, `play-seeds.json`, compiled `WORLD_BIBLE.md` and `overview.html`.
+
+`pack/` is written by `/world-bible-pack`, not this skill.
 
 Maker skills copy or cite; they do not move the canonical files.

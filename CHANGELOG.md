@@ -1,5 +1,22 @@
 # Changelog
 
+## 3.0.0
+
+The bible is a **core rule book**, not a thin setting doc.
+
+Baldur's Gate 1/2/3 sit on one D&D core book. This folder is that book.
+Later skills cut pictures, jobs, and numbers from it. They are not this skill.
+
+- Default scale is **`core`**: enough toys for three later campaigns.
+  `sitting` is one district. `seed` is a pitch.
+- Primer adds calendar, travel, economy, opposition.
+- People name a want this season and leverage a player can use.
+- `play-seeds.json` `jobs[]` is the three-games test.
+- Art look adds crowd, motif, and required subjects at core. Still no pictures.
+- Production line: `references/PIPELINE.md`. This skill stops at W6.
+  `/world-bible-pack` and `/rpg-campaign-maker` are later sessions.
+- Validate checks id existence, core counts, and distinct job sites.
+
 ## 2.0.0
 
 This file is a **core rule book**, not a campaign.

@@ -1,6 +1,6 @@
 {
   "schema": "doki.world-bible.lock",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "slug": "{{SLUG}}",
   "title": "",
   "language": "en",
@@ -8,7 +8,7 @@
   "intake": "original",
   "ip": "original",
   "homage_source": "n/a",
-  "scale": "sitting",
+  "scale": "core",
   "temperament": {
     "feelings": [
       {"name": "", "lived": ""},

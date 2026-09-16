@@ -1,6 +1,6 @@
 {
   "schema": "doki.world-bible.world",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "slug": "{{SLUG}}",
   "title": "",
   "language": "en",
@@ -19,6 +19,8 @@
   "window": {"era": "", "start": "", "playable_present": "", "stop": ""},
   "laws": [],
   "everyday": {"eat": "", "pay": "", "move": "", "sleep": "", "die": "", "news": ""},
+  "calendar": {"day": "", "week": "", "clock": "", "curfew": ""},
+  "travel": {"how": "", "times": "", "stop": ""},
   "signature": {},
   "slang": []
 }

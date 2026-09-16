@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build overview.html from the four JSON folders."""
+"""Build overview.html from JSON folders."""
 from __future__ import annotations
 
 import html
@@ -64,6 +64,13 @@ def labels(lang: str) -> dict:
             "roles": "能当谁",
             "power": "难度",
             "conflict": "冲突",
+            "economy": "物价",
+            "opposition": "对手",
+            "calendar": "作息",
+            "travel": "赶路",
+            "jobs": "可切的活",
+            "crowd": "人群",
+            "motif": "反复出现的东西",
             "gear": "道具",
             "play": "怎么玩",
             "box": "玩具箱",
@@ -107,6 +114,13 @@ def labels(lang: str) -> dict:
         "roles": "Roles",
         "power": "Hardness",
         "conflict": "Conflict",
+        "economy": "Economy",
+        "opposition": "Opposition",
+        "calendar": "Calendar",
+        "travel": "Travel",
+        "jobs": "Jobs",
+        "crowd": "Crowd",
+        "motif": "Motif",
         "gear": "Gear",
         "play": "Play",
         "box": "Box",
@@ -239,6 +253,18 @@ def write_overview(root: Path) -> Path:
         for k in ("eat", "pay", "move", "sleep", "die", "news")
         if everyday.get(k)
     )
+    calendar = world.get("calendar") or {}
+    calendar_html = "".join(
+        f"<div><h4>{e(k)}</h4><p>{e(calendar.get(k) or '')}</p></div>"
+        for k in ("day", "week", "clock", "curfew")
+        if calendar.get(k)
+    )
+    travel = world.get("travel") or {}
+    travel_html = "".join(
+        f"<div><h4>{e(k)}</h4><p>{e(travel.get(k) or '')}</p></div>"
+        for k in ("how", "times", "stop")
+        if travel.get(k)
+    )
 
     def rail(events: list) -> str:
         items = []
@@ -259,6 +285,14 @@ def write_overview(root: Path) -> Path:
 
     doki = seeds.get("doki") or {}
     seed_bits = []
+    for job in seeds.get("jobs") or []:
+        if not isinstance(job, dict):
+            continue
+        seed_bits.append(
+            f"<div><h3>{e(job.get('title') or job.get('id') or 'job')}</h3>"
+            f"<p><b>site.</b> {e(job.get('site') or '')} · <b>clock.</b> {e(job.get('clock') or '')}</p>"
+            f"<p>{e(job.get('body') or job.get('fork') or '')}</p></div>"
+        )
     for key, label in (("fmv", "FMV"), ("rpg", "RPG"), ("tcg", "TCG")):
         if seeds.get(key):
             seed_bits.append(f"<div><h3>{label}</h3><p>{e(seeds.get(key))}</p></div>")
@@ -286,7 +320,14 @@ def write_overview(root: Path) -> Path:
 
     pwr = play.get("power") or {}
     conf = play.get("conflict") or {}
+    eco = play.get("economy") or {}
     roles_html = "".join(vignette_html(v, L) for v in play.get("roles") or [])
+    opposition_html = "".join(vignette_html(v, L) for v in play.get("opposition") or [])
+    eco_html = "".join(
+        f"<div><h4>{e(k)}</h4><p>{e(eco.get(k) or '')}</p></div>"
+        for k in ("currency", "street_wage", "skilled_wage", "bread", "room", "fine")
+        if eco.get(k)
+    )
     play_block = ""
     if play:
         play_block = f"""<section class="ch" id="play">
@@ -305,6 +346,8 @@ def write_overview(root: Path) -> Path:
       <p><b>fight.</b> {e(conf.get('fight') or '')}</p>
       <p><b>fail.</b> {e(conf.get('fail') or '')}</p>
     </div>
+    {("<p class='ch-num'>" + e(L['economy']) + "</p><div class='everyday'>" + eco_html + "</div>") if eco_html else ""}
+    {("<p class='ch-num'>" + e(L['opposition']) + "</p><div class='vignettes'>" + opposition_html + "</div>") if opposition_html else ""}
     <p class="ch-num">{e(L['roles'])}</p>
     <div class="vignettes">{roles_html}</div>
   </div>
@@ -363,6 +406,8 @@ def write_overview(root: Path) -> Path:
     <ol class="laws">{laws}</ol>
     <p class="ch-num">{e(L['everyday'])}</p>
     <div class="everyday">{everyday_html}</div>
+    {("<p class='ch-num'>" + e(L['calendar']) + "</p><div class='everyday'>" + calendar_html + "</div>") if calendar_html else ""}
+    {("<p class='ch-num'>" + e(L['travel']) + "</p><div class='everyday'>" + travel_html + "</div>") if travel_html else ""}
     <p class="ch-num" style="margin-top:2.5rem">{e(L['signature'])}</p>
     {vignette_html(sig, L)}
   </div>
@@ -415,6 +460,7 @@ def write_overview(root: Path) -> Path:
       <p><b>{e(L['medium'])}.</b> {e(art.get('medium') or '')}</p>
       <p>{e(art.get('wardrobe') or '')}</p>
       <p>{e(art.get('buildings') or '')}</p>
+      <p><b>{e(L['crowd'])}.</b> {e(art.get('crowd') or '')}</p>
     </div>
     <div class="palette">{swatches}</div>
     {plates_html(counted)}
