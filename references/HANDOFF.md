@@ -45,17 +45,18 @@ WB is larger than a sitting. Cut a **slice**.
 
 Do not ingest the whole timeline into `play/story.js`.
 
-## world-bible-art
+## world-bible-pack
 
-WB W5 writes the registry. This skill paints it.
+WB is text. This skill writes `pack/` pictures.
 
-| WB | Art pack |
-|----|----------|
-| `lock.look` + `art.json` medium / style_sentence / palette | prompt stem |
-| `plates[]` with `prompt` | `image_gen` / `image_edit` in ART.md order |
-| `generated: false` | set `true` when files exist |
+| WB | Pack |
+|----|------|
+| `lock.look` + `art.json` look | prompt stem |
+| `stage.people` | standing portraits on flat black |
+| `stage.places` | location plates + one playable-window map |
+| `signature` + ordinary objects | props in use |
 
-Do not start `/world-bible-art` from `/world-bible` unless the author asked.
+Do not start `/world-bible-pack` from `/world-bible` unless the author asked.
 
 ## game-maker-pipeline
 
@@ -63,7 +64,7 @@ WB is not the ≥99p Design Bible.
 
 | WB | Pipeline |
 |----|----------|
-| temperament + `lock.look` + style sentence + registry | `art/style-anchor.json` / re_00 tone. Pictures from `/world-bible-art` |
+| temperament + `lock.look` + style sentence | `art/style-anchor.json` / re_00 tone. Pictures from `/world-bible-pack` |
 | signature + spatial logic | GDD systems *candidates* — still require `gdd: accept` |
 | plates | references for production; re-register in `art-prompt-registry.json` before regen |
 

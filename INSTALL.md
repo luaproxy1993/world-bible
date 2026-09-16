@@ -1,4 +1,4 @@
-# Install — world-bible v1.9.0
+# Install — world-bible v1.10.0
 
 ## The one command
 
@@ -45,3 +45,9 @@ cat ~/.grok/skills/world-bible/VERSION
 ```
 
 Then in the agent: `/world-bible`.
+
+Pictures (separate skill):
+
+```bash
+npx skills add luaproxy1993/world-bible-pack -y
+```

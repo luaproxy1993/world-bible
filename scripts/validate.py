@@ -1,15 +1,11 @@
 #!/usr/bin/env python3
-"""Validate a world-bible folder: JSON, scale counts, 4×3 art registry."""
+"""Validate a world-bible folder: JSON, scale counts, written art look."""
 from __future__ import annotations
 
 import json
 import sys
-from collections import Counter
 from pathlib import Path
 
-KINDS = ("scene", "person", "prop", "signature")
-MIN_PER = 3
-MIN_RATIOS = 4
 # Keep in sync with references/ART.md schools.
 SCHOOLS = ("oil-box", "glossy-photo", "cinematic-still", "cel", "print")
 LOOK_SOURCES = ("author", "inferred")
@@ -30,7 +26,7 @@ def count_range(errors: list[str], label: str, n: int, lo: int, hi: int) -> None
         errors.append(f"{label}: {n} not in {lo}–{hi}")
 
 
-def main(root: Path, require_images: bool = False) -> int:
+def main(root: Path) -> int:
     errors: list[str] = []
     required = [
         root / "lock.json",
@@ -82,39 +78,17 @@ def main(root: Path, require_images: bool = False) -> int:
             *bounds["window"],
         )
 
-    art_path = root / "art" / "art.json"
-    if art_path.is_file() and "art/art.json" in loaded:
+    if "art/art.json" in loaded:
         art = loaded["art/art.json"]
-        plates = art.get("plates") or []
-        counted = [p for p in plates if p.get("kind") in KINDS]
-        anchors = [p for p in plates if p.get("kind") == "anchor"]
-        if len(anchors) > 1:
-            errors.append(f"kind:anchor {len(anchors)} > 1 (one canonical style-anchor)")
-        kinds = Counter(p.get("kind") for p in counted)
-        for k in KINDS:
-            n = kinds.get(k, 0)
-            if n < MIN_PER:
-                errors.append(f"art kind {k}: {n} < {MIN_PER}")
-        if len(counted) < 12:
-            errors.append(f"counted plates {len(counted)} < 12")
-        ratios = {p.get("aspect_ratio") for p in counted if p.get("aspect_ratio")}
-        if len(ratios) < MIN_RATIOS:
-            errors.append(f"distinct aspect_ratio {sorted(ratios)} < {MIN_RATIOS}")
-        generated = art.get("generated")
-        check_files = require_images or generated is True or generated is None
-        for p in counted:
-            rel = p.get("path") or ""
-            cap = (p.get("caption") or "").strip()
-            title = (p.get("title") or "").strip()
-            prompt = (p.get("prompt") or "").strip()
-            if not title:
-                errors.append(f"{p.get('id')} missing title")
-            if not cap:
-                errors.append(f"{p.get('id')} missing caption")
-            if generated is False and not prompt:
-                errors.append(f"{p.get('id')} missing prompt")
-            if check_files and rel and not (root / rel).is_file():
-                errors.append(f"{p.get('id')} file missing: {rel}")
+        if not (art.get("style_sentence") or "").strip():
+            errors.append("art.style_sentence is empty")
+        if not (art.get("medium") or "").strip():
+            errors.append("art.medium is empty")
+        if not (art.get("light") or "").strip():
+            errors.append("art.light is empty")
+        palette = art.get("palette") or []
+        if len(palette) < 5:
+            errors.append(f"art.palette {len(palette)} < 5")
 
     if errors:
         print("FAIL")
@@ -127,8 +101,6 @@ def main(root: Path, require_images: bool = False) -> int:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("usage: validate.py <world-root> [--images]", file=sys.stderr)
+        print("usage: validate.py <world-root>", file=sys.stderr)
         sys.exit(1)
-    root = Path(sys.argv[1]).expanduser().resolve()
-    require_images = "--images" in sys.argv[2:]
-    sys.exit(main(root, require_images=require_images))
+    sys.exit(main(Path(sys.argv[1]).expanduser().resolve()))

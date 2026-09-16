@@ -1,25 +1,24 @@
 ---
 name: world-bible
 description: >
-  Turn multimodal seeds into a modular game World Bible (temperament, scale,
-  stage, timeline, art registry — no pic gen). Use when the user runs
-  /world-bible, says World Bible, WB, 世界圣经, 世界观设定, or wants a world
-  alignment doc before an FMV, RPG, TCG, or Doki pack. Pictures are
-  /world-bible-art.
+  Turn multimodal seeds into a modular game World Bible — text only
+  (temperament, scale, stage, timeline, art style as prose). Use when the
+  user runs /world-bible, says World Bible, WB, 世界圣经, 世界观设定. Pictures,
+  portraits, maps, and props are /world-bible-pack.
 argument-hint: "[world_path] [new|lock|ingest|world|stage|timeline|art|compile]"
 user-invocable: true
 metadata:
   short-description: Modular game World Bible generator
-  version: "1.9.0"
-  feeds: "doki-game-maker, galgame-maker, rpg-campaign-maker, game-maker-pipeline, world-bible-art"
+  version: "1.10.0"
+  feeds: "doki-game-maker, galgame-maker, rpg-campaign-maker, game-maker-pipeline, world-bible-pack"
 ---
 
 # World Bible
 
-A World Bible is the **stage document** a team aligns on before anyone
-builds a game: temperament, scale, stage, timeline, art registry.
-Modular, editable, genre-agnostic. Downstream maker skills consume it.
-Pictures are `/world-bible-art`, not this pipeline.
+A World Bible is **text**. Temperament, scale, stage, timeline, and a
+written art look. No pictures. Modular, editable, genre-agnostic.
+Downstream skills consume it. Portraits, maps, and props are
+`/world-bible-pack`.
 
 Default audience: **North America / Europe**. Default language: **English**
 in every JSON field, caption, overview, and compile. Another language only
@@ -55,11 +54,11 @@ intake (script / homage / image / audio / pitch)
   → lock (temperament + story window + signature + look)
   → ingest (cite; extract residue)
   → world + stage + timeline (JSON vignettes)
-  → art registry (no pictures)
+  → art look (text)
   → compile (WORLD_BIBLE.md + overview.html from JSON)
 ```
 
-Pictures: `/world-bible-art` after W6.
+Pictures: `/world-bible-pack` after W6.
 
 Load on demand:
 
@@ -67,7 +66,7 @@ Load on demand:
 - Lock JSON → `references/LOCK.md`
 - Module schemas, vignette form → `references/SPEC.md`
 - Multimodal intake → `references/INGEST.md`
-- Art registry (no pic gen) → `references/ART.md`
+- Art look (text) → `references/ART.md`
 - Downstream mapping → `references/HANDOFF.md`
 - Structure moves (Cyberpunk Red / WoD / GURPS / Edith / Diablo) → `references/CANON.md`
 - Tiny filled example → `references/EXAMPLE.md`
@@ -89,7 +88,7 @@ Load on demand:
 | `world` | W2 |
 | `stage` | W3 |
 | `timeline` | W4 |
-| `art` | W5 registry only. Text look-dev if `lock.look.source` is `inferred` |
+| `art` | W5 written look only. Text look-dev if `lock.look.source` is `inferred` |
 | `compile` | W6 |
 
 ## Run
@@ -156,7 +155,7 @@ Then `pipeline_state.json`:
 ```json
 {
   "skill": "world-bible",
-  "skill_version": "1.9.0",
+  "skill_version": "1.10.0",
   "slug": "<slug>",
   "step": "W0",
   "status": "in_progress",
@@ -241,18 +240,15 @@ relations to places / people / factions.
 
 ## W5 · Art
 
-**Done when** `art/art.json` is a registry: `generated` is `false`, medium
-matches `lock.look`, look-dev is resolved, every counted plate has caption
-**and** prompt, and the 4×3 floor is met with mixed ratios. **No pictures.**
+**Done when** `art/art.json` names the look in prose: medium matches
+`lock.look`, style_sentence + palette + light are filled, look-dev is
+resolved. **No pictures. No plate files.**
 
 Load `references/ART.md`. Do not load `imagine`. Do not call `image_gen`
 or `image_edit`. If `lock.look.source` is `inferred`, write three
-different-school `look_dev` rows and **STOP** for `look-dev: pick` before
-the plate list. User-supplied images stay in `source/` and may be listed
-as paths; do not redraw them unless asked.
-
-After W6, point the author at `/world-bible-art`. Do not start it unless
-they asked.
+different-school `look_dev` rows and **STOP** for `look-dev: pick`.
+Optional `subjects[]` may name what a later pack should show (entry face,
+key places, signature in use). User-supplied images stay in `source/`.
 
 **STOP** — `step W5: accept`
 
@@ -272,8 +268,8 @@ Play-seeds (SPEC §Play-seeds): how this world becomes FMV / RPG / TCG / Doki.
 Seeds are hooks, not systems. Sitting scale: name enough `story_window`
 beats that a writer can hang ~3 hours.
 
-After accept, if they want pictures: `/world-bible-art`. Do not start it
-in this turn unless they asked.
+After accept, if they want portraits, maps, and props: `/world-bible-pack`.
+Do not start it in this turn unless they asked.
 
 Load `references/HANDOFF.md` if the author names a downstream skill. Point
 them; do not start that skill's pipeline unless they asked.
@@ -292,12 +288,12 @@ them; do not start that skill's pipeline unless they asked.
 3. Every historical fact leaves residue on the playable present.
 4. The signature is mechanically touchable.
 5. Relations are ids that exist in the four JSON files.
-6. Art registry: 4×3 floor, mixed ratios, caption+prompt per plate, one
-   style-anchor row. `generated` is false. Pictures are `/world-bible-art`.
+6. Art look is prose: school tell, medium, palette, light. No image files.
+   Pictures are `/world-bible-pack`.
 7. Hand-edits belong in JSON. `WORLD_BIBLE.md` and `overview.html` are compile-only.
 
 Homage extracts class, not copyrighted plot or names. Write the lock before
-generating a single image or a single extra continent.
+a single extra continent. Do not generate pictures in this skill.
 
 ## Session bootstrap
 
@@ -307,7 +303,7 @@ load:
   - {WORLD}/pipeline_state.json, lock.json, world/world.json   (if they exist)
   - {SKILL_ROOT}/references/INGEST.md     at W1 or when intake is not a sentence
   - {SKILL_ROOT}/references/SPEC.md       at W2–W4 and W6
-  - {SKILL_ROOT}/references/ART.md        at W5 (registry only)
+  - {SKILL_ROOT}/references/ART.md        at W5 (text look)
   - {SKILL_ROOT}/references/HANDOFF.md    when a downstream skill is named
   - {SKILL_ROOT}/references/CANON.md      when prose goes generic
 preflight:

@@ -1,7 +1,7 @@
 # World Bible · field sheet
 
 One folder = one world. Canonical text is **JSON**. Default language **English**.
-A world stage document. Maker skills consume it. Pictures: `/world-bible-art`.
+A world stage document. Maker skills consume it. Pictures: `/world-bible-pack`.
 
 ```
 <slug>/
@@ -9,7 +9,8 @@ A world stage document. Maker skills consume it. Pictures: `/world-bible-art`.
   world/world.json          1 world
   stage/stage.json          2 places / people / factions
   timeline/timeline.json    3 timeline
-  art/art.json              4 art registry (images from /world-bible-art)
+  art/art.json              4 written look (pictures: /world-bible-pack)
+  pack/                     portraits, map, places, props (other skill)
   play-seeds.json           how it could become a game
   overview.html             human overview (compiled)
   WORLD_BIBLE.md            same content as markdown (compiled)
@@ -89,34 +90,16 @@ Concurrent extras: `worldline`, optional `comparison[]`.
 
 ---
 
-## 4 · `art/art.json` + images
-
-Visual law:
+## 4 · `art/art.json` (text look)
 
 | Field | What it is |
 |-------|------------|
-| `generated` | `false` after W5. `/world-bible-art` sets `true` |
-| `style_sentence` | Locked school tell + locked surface + composition (`ART.md`) |
+| `style_sentence` | School tell + locked surface + composition (`ART.md`) |
 | `palette[]` | 5–8 colors: `name` `hex` `use` |
 | `light` | Who lights the world |
-| `medium` | Stem for `lock.look.school` (`ART.md`). Copied at W5 |
+| `medium` | Stem for `lock.look.school` (`ART.md`) |
 | `look_dev[]` | Text candidates when look is inferred. Different schools |
-| `plates[]` | The picture list (registry) |
-
-Each plate:
-
-| Field | What it is |
-|-------|------------|
-| `id` | `art.north-try-pots` |
-| `kind` | `scene` / `person` / `prop` / `signature` (count toward 12). Extra: `cover` / `anchor` / `look-dev` |
-| `aspect_ratio` | `16:9` `9:16` `1:1` `3:4` `4:3` `3:2` … |
-| `path` | File under `art/scenes/` `people/` `props/` `signature/` |
-| `title` | Short name |
-| `caption` | What the picture is showing. SKILL.md Voice |
-| `prompt` | 2–5 sentences. Starts with school tell + medium stem |
-| `subject_id` | Place / person / signature this plate belongs to |
-
-**Floor: 4 × 3 = 12.** Caption + prompt required. Files required only after `/world-bible-art`. Cover and style-anchor are extra. One canonical `kind: anchor`.
+| `subjects[]` | Optional captions for `/world-bible-pack`. Else the pack reads stage |
 
 ---
 

@@ -137,38 +137,22 @@ Event:
 
 ## Art (`art/art.json`)
 
-See `ART.md` for the registry. `medium` is the stem for `lock.look.school`. One canonical `kind: anchor` row. `generated` is false until `/world-bible-art`. Schema:
+See `ART.md`. Written look only. Pictures are `/world-bible-pack`. Schema:
 
 ```json
 {
   "schema": "doki.world-bible.art",
-  "version": "1.2.0",
-  "generated": false,
+  "version": "1.3.0",
   "style_sentence": "",
   "palette": [{"name": "", "hex": "", "use": ""}],
   "light": "",
   "medium": "",
   "look_dev": [],
-  "plates": []
+  "subjects": []
 }
 ```
 
-Plate:
-
-```json
-{
-  "id": "art.",
-  "kind": "scene",
-  "aspect_ratio": "16:9",
-  "path": "art/scenes/.png",
-  "title": "",
-  "caption": "what the picture is showing. SKILL.md Voice",
-  "prompt": "owned 2–5 sentences; starts with school tell + medium stem",
-  "subject_id": "place."
-}
-```
-
-Floor: 4 kinds × 3 plates = **12**. Distinct `aspect_ratio` among those 12: **≥ 4**. Caption and prompt required. Cover/anchor extras allowed. Files are not required until `generated` is true.
+`subjects[]` optional: `{ "id", "kind", "subject_id", "caption" }`. If empty, the pack skill derives people, places, and signature from stage.
 
 ---
 
