@@ -1,9 +1,11 @@
 {
   "schema": "doki.world-bible.art",
-  "version": "1.1.0",
+  "version": "1.2.0",
+  "generated": false,
   "style_sentence": "",
   "palette": [],
   "light": "",
   "medium": "",
+  "look_dev": [],
   "plates": []
 }

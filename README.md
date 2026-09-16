@@ -7,7 +7,7 @@ A coding-agent skill that turns multimodal seeds into a modular game World Bible
 /world-bible new <slug>
 ```
 
-JSON in four folders is canonical. `WORLD_BIBLE.md` and `overview.html` are compile-only.
+JSON in four folders is canonical. `WORLD_BIBLE.md` and `overview.html` are compile-only. Default scale is **sitting** (~3 hours). Pictures are a second skill: `/world-bible-art`.
 
 Voice is a production manual: complete sentences, common words, the rule and the room. Not a diary. Not a fragment stack.
 
@@ -36,7 +36,15 @@ If this folder is a git clone:
 git -C ~/.grok/skills/world-bible pull
 ```
 
-Check `VERSION` after update. Current: **1.8.0**.
+Check `VERSION` after update. Current: **1.9.0**.
+
+Pictures after the bible is accepted:
+
+```text
+/world-bible-art
+```
+
+`install.sh` also copies `world-bible-art` next to `world-bible`.
 
 ## New world
 

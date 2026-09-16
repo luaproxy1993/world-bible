@@ -1,7 +1,7 @@
 # World Bible · field sheet
 
 One folder = one world. Canonical text is **JSON**. Default language **English**.
-A world alignment seed. Maker skills consume it.
+A world stage document. Maker skills consume it. Pictures: `/world-bible-art`.
 
 ```
 <slug>/
@@ -9,7 +9,7 @@ A world alignment seed. Maker skills consume it.
   world/world.json          1 world
   stage/stage.json          2 places / people / factions
   timeline/timeline.json    3 timeline
-  art/art.json + images     4 art
+  art/art.json              4 art registry (images from /world-bible-art)
   play-seeds.json           how it could become a game
   overview.html             human overview (compiled)
   WORLD_BIBLE.md            same content as markdown (compiled)
@@ -40,6 +40,7 @@ Every story object (place, person, faction, institution, signature, event) uses 
 | `temperament.about` | One sentence: this world is about X |
 | `story_window` | `era`, `start`, `playable_present`, `stop` |
 | `signature` | The one unique thing you can steal / switch / check (`working_name`, `everyday`, `play`) |
+| `scale` | `seed` (20–40 min) or `sitting` (~3 hours). Counts in `LOCK.md`. Default `sitting` |
 | `look` | Paint school from intake: `school` `named_as` `why` `forbidden[]` `source` (`author` / `inferred`). Schools in `ART.md` |
 | `timeline_shape` | `linear` / `cyclic` / `concurrent` |
 | `worldlines` | Timeline tracks; one is `canonical` |
@@ -67,9 +68,9 @@ Every story object (place, person, faction, institution, signature, event) uses 
 
 | Array | Count | What it is |
 |-------|-------|------------|
-| `places` | 5–12 | Locations as short stories |
-| `people` | 4–10 | Bios as incidents; one `entry_face` |
-| `factions` | 3–7 | Who they are this season, where they walk |
+| `places` | `lock.scale` | Locations as briefs |
+| `people` | `lock.scale` | People as briefs; one `entry_face` |
+| `factions` | `lock.scale` | Who they are this season, where they walk |
 | `institutions` | as needed | Origin of a law, church, license, currency |
 
 ---
@@ -81,7 +82,7 @@ Every story object (place, person, faction, institution, signature, event) uses 
 | `shape` | `linear` / `cyclic` / `concurrent` |
 | `worldlines[]` | Tracks; concurrent worlds get a comparison table |
 | `world_key[]` | History that still marks the present |
-| `story_window[]` | The stretch a game actually occupies |
+| `story_window[]` | The stretch a game occupies. Beat count: `lock.scale` |
 
 Each event: `id` `when` `title` `residue` `relations` `body` (2–4 sentences).  
 Concurrent extras: `worldline`, optional `comparison[]`.
@@ -94,11 +95,13 @@ Visual law:
 
 | Field | What it is |
 |-------|------------|
-| `style_sentence` | Locked school + locked surface + composition (`ART.md`) |
+| `generated` | `false` after W5. `/world-bible-art` sets `true` |
+| `style_sentence` | Locked school tell + locked surface + composition (`ART.md`) |
 | `palette[]` | 5–8 colors: `name` `hex` `use` |
 | `light` | Who lights the world |
 | `medium` | Stem for `lock.look.school` (`ART.md`). Copied at W5 |
-| `plates[]` | The picture list |
+| `look_dev[]` | Text candidates when look is inferred. Different schools |
+| `plates[]` | The picture list (registry) |
 
 Each plate:
 
@@ -110,9 +113,10 @@ Each plate:
 | `path` | File under `art/scenes/` `people/` `props/` `signature/` |
 | `title` | Short name |
 | `caption` | What the picture is showing. SKILL.md Voice |
+| `prompt` | 2–5 sentences. Starts with school tell + medium stem |
 | `subject_id` | Place / person / signature this plate belongs to |
 
-**Floor: 4 × 3 = 12.** At least 3 scenes, 3 people, 3 props, 3 signature objects. At least 4 different ratios. Cover, style-anchor, and look-dev are extra. One canonical `kind: anchor`.
+**Floor: 4 × 3 = 12.** Caption + prompt required. Files required only after `/world-bible-art`. Cover and style-anchor are extra. One canonical `kind: anchor`.
 
 ---
 

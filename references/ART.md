@@ -1,84 +1,71 @@
-# Art plates
+# Art registry
 
-Use at W5. Load the `imagine` skill before any `image_gen` / `image_edit`.
-Recurring subjects: edit-chain from a canonical plate.
+Use at W5 to **write** `art/art.json`. Do not call `image_gen` or `image_edit`
+here. Pictures are `/world-bible-art`.
 
 These plates **anchor temperament**. They are not engine-ready sprites.
 
 ## Visual law
 
 The lock names *what* is in the picture (wardrobe, architecture, era,
-palette) and *how* it is painted (`lock.look`). W5 executes that look.
-It does not invent a second school.
+palette) and *how* it is painted (`lock.look`). The registry records that
+look. It does not invent a second school.
 
-A world ships **one** `kind: anchor` plate. Cover, person, scene, and
-signature are treatments of that school (box, card crop, place, object
-in use). Four live style-anchors are out.
+A world ships **one** `kind: anchor` plate in the registry. Cover, person,
+scene, and signature are treatments of that school. Four live style-anchors
+are out.
 
 ## Schools
 
-`lock.look.school` is one of these. Medium stems go into `art.json`
-`medium` verbatim, with `named_as` substituted when the lock set one.
+`lock.look.school` is one of these. `medium` is the stem **verbatim**.
+`named_as` may replace the named painter or camera inside the same school.
+It may not change school.
 
-| school | Medium stem | Start `forbidden` |
-|--------|-------------|-------------------|
-| `oil-box` | Oil on canvas in the manner of Ayami Kojima's Castlevania Symphony of the Night box art: thick visible brushstrokes, glaze, varnish. | photograph, cinematic still, 3D render |
-| `glossy-photo` | Glossy editorial photograph, magazine-ready skin, commercial entertainment lighting. | oil painting, horror-blue grade, 3D render |
-| `cinematic-still` | Contemporary cinematic production still, tactile materials, practical light. | oil painting, concept-art chrome, generic brown apocalypse |
-| `cel` | Hand-painted animation cel: flat color fields, clean contour, graphic figure-in-frame. | photoreal skin, painterly oil, 3D render |
-| `print` | Ink print (woodcut or etching): graphic figure-in-frame, visible plate texture, limited inks. | photograph, digital-painting gloss, 3D render |
+Thumbnail test: two schools must remain distinct at postage-stamp size.
+If a prompt could pass for another school, rewrite it.
 
-Default when intake does not name a look: `oil-box`, Kojima / SotN as
-`named_as`. A named painter inside `oil-box` replaces Kojima in the
-stem and keeps visible brush and box-art composition.
+| school | Tell (thumbnail) | Medium stem | Must | Forbidden |
+|--------|------------------|-------------|------|-----------|
+| `oil-box` | Impasto bricks of paint; graphic figure-in-frame; 1990s painted game box | Oil on canvas, painted 1990s Japanese game box, Ayami Kojima / Symphony of the Night school: thick visible impasto, glaze, varnish, graphic figure-in-frame. | Visible brush ridges. Box-art composition. Painted, not filmed. | Photograph, lens bokeh, skin pores, cel contour, etching hatch, 3D render, cinematic color grade |
+| `glossy-photo` | Catchlights; magazine skin; shallow depth of field | Glossy editorial photograph, 85mm, catchlights in eyes, magazine-ready skin, commercial strobe or golden-hour key. Camera, not a brush. | Photographic grain or sharpness. Real skin. Depth of field. | Brushstrokes, oil glaze, cel outline, woodcut, painterly canvas, 3D render |
+| `cinematic-still` | 35mm production frame; practical light; tactile dirt | Contemporary 35mm cinematic production still, anamorphic or spherical, practical lamps, tactile materials, production design. A film frame, not an illustration. | Motion-picture lighting. Set decoration. No paint texture. | Oil impasto, cel fill, etching, editorial beauty strobe, concept-art chrome, 3D render |
+| `cel` | Hard black contour; flat fills; no pores | Hand-painted animation cel: hard ink contour, flat color fields, graphic figure-in-frame, no photographic texture. | Closed outlines. Flat or simple cel shade. | Photoreal skin, oil brush, film grain, etching, 3D render |
+| `print` | Limited inks; hatch or plate bite; paper tooth | Ink print, woodcut or copper etching: limited inks, visible hatch or plate bite, paper tooth, graphic figure-in-frame. | Hatch or carved edge. Few inks. Print, not paint. | Continuous-tone photo, oil glaze, cel candy color, digital-painting gloss, 3D render |
 
-Map intake to a school. A dating-show brief is `glossy-photo`. A cozy
-American Halloween is `cinematic-still`. A gothic boarding college may
-be `oil-box`. Cel and print only when the brief names that graphic
-tradition.
+Map intake to a school by **tell**, not by mood. A dating-show brief is
+`glossy-photo`. A cozy American Halloween is `cinematic-still`. A gothic
+painted box is `oil-box`. Cel and print only when the brief names that
+graphic tradition.
+
+Default when intake does not name a look: `oil-box`.
 
 ## Law fields (`art/art.json`)
 
 | Field | Must contain |
 |-------|----------------|
+| `generated` | `false` after W5. `/world-bible-art` sets `true` when files exist. |
 | `medium` | The stem for `lock.look.school` (table above). |
-| `style_sentence` | Locked school + locked surface + composition. One pin-able line. |
+| `style_sentence` | Locked school **tell** + locked surface + composition. One pin-able line. |
 | `palette[]` | 5–8 named pigments: `name` `hex` `use`. Prompts pick 2–3 of these. |
-| `light` | Who lights the world. Paint that light. |
+| `light` | Who lights the world. |
+| `plates[]` | Registry. Each counted plate has `title` `caption` `prompt`. |
+| `look_dev[]` | Optional. Text candidates when `lock.look.source` is `inferred`. |
 
-Front-load the school, then the locked surface, in `style_sentence`.
-Signature objects appear in that world's light, in that school.
+Front-load the school tell, then the locked surface, in `style_sentence`
+and in every `prompt`.
 
-Specificity is residue under the surface — a designer pin on a
-collarbone; a lamp burning oil on a wet street. It is not a different
-school.
+## Look-dev (text, at W5)
 
-## Look-dev
-
-Run **before** the twelve plates when `lock.look.source` is `inferred`,
-or when the author asked to see options. Skip when `source` is `author`.
-
-Same location as the future style-anchor (empty of a hero, teaches the
-light). Two to four candidates. Distinct schools from the table that
-could still serve this temperament. Include the inferred school.
-
-```
-art/look-dev/<school>.png
-kind: look-dev
-```
-
-Look-dev plates do not count toward 12. **STOP** for:
-
-```
-look-dev: pick <school>
-look-dev: pick <school> — named_as: <painter or show>
-```
-
-Then: write the pick into `lock.look` (`source` becomes `author`),
-promote the winner to `art/anchors/style-anchor.png` (`kind: anchor`),
-leave losers in `art/look-dev/`. Generate the floor from that anchor.
+When `lock.look.source` is `inferred`, or the author asked for options:
+write **three** `look_dev` rows. Each row a **different school** from the
+table (not three painters in `oil-box`). Same location described. **STOP**
+for `look-dev: pick <school>`. Then write `lock.look` (`source` becomes
+`author`) and the plate registry. No images.
 
 ## Floor — 4 × 3 = 12
+
+Same floor at every scale. Scale adds rooms and beats, not extra style
+plates. `/world-bible-art full` may later paint remaining stage subjects.
 
 | Kind | Min | Folder | What |
 |------|-----|--------|------|
@@ -89,11 +76,10 @@ leave losers in `art/look-dev/`. Generate the floor from that anchor.
 
 ≥12 counting only those four kinds. ≥4 distinct `aspect_ratio` values among them.
 
-Pick ratios from: `16:9` `9:16` `1:1` `3:4` `4:3` `3:2` `2:3`. Do not ship twelve 16:9 stills.
+Pick ratios from: `16:9` `9:16` `1:1` `3:4` `4:3` `3:2` `2:3`.
 
-Each plate has `title` + `caption` in `art/art.json`. A plate without caption does not count.
-
-Cover, style-anchor, and look-dev are extras (`kind: cover|anchor|look-dev`). They do not count toward 12.
+Each counted plate: `title` + `caption` + `prompt`. Cover and style-anchor
+are extras (`kind: cover|anchor`). They do not count toward 12.
 
 ## Plate recipes
 
@@ -103,69 +89,36 @@ foreground object, the world receding, a designed sky.
 `16:9` or `3:2`. No title lettering.
 
 **Style anchor** (`kind: anchor`, extra). A location that teaches the
-light. Empty of a hero. `image_gen` first (or the look-dev winner);
-later scenes `image_edit` from this plate.
+light. Empty of a hero.
 
 **Person**. Standing three-quarter figure, one subject, isolated on
 **flat black**. Clear silhouette, cutout-ready. Ratio `3:4` or `2:3`.
-This is a portrait plate, not a scene with a person in it. First of
-each face is `image_gen`; later views `image_edit`.
 
-**Scene**. Painted place in the playable present. No hero in the
-foreground. The world's actual light, in the locked school.
+**Scene**. Place in the playable present. No hero in the foreground.
+The world's actual light, in the locked school.
 
 **Prop**. An ordinary object of this world, in use or sitting where it
 lives. Not a catalog product shot on white.
 
 **Signature**. The unique thing **in use** in this world's light.
-Not a MacGuffin on a pedestal.
 
-## Order
+## Prompts (written at W5, used by `/world-bible-art`)
 
-```
-lock.look → medium + style sentence
-  → look-dev (only if inferred / asked)   STOP look-dev: pick
-  → style anchor          image_gen, or promote the pick
-  → cover                 image_edit from anchor (extra)
-  → 3 signature           mixed ratios; in use, not catalog
-  → entry-face master     image_gen on flat black, freeze
-  → other people          first of each is gen on black; then edit
-  → 3 scenes              image_edit from anchor
-  → 3 props               image_edit from anchor
-```
-
-Parallelize only within one step.
-
-## Prompts
-
-Own the prompt (2–5 sentences). Every prompt starts with the locked
-medium stem, then the plate:
+Own the prompt (2–5 sentences). Every prompt **starts with the school
+tell + medium stem**, then the plate. Restate `forbidden` as the last
+sentence of the prompt (positive: "this is X"; then the school's Must).
 
 ```
-[medium stem]. [2–3 pigments from palette]. [subject]. [setting].
-[composition]. [this world's light].
+[tell]. [medium stem]. [2–3 pigments]. [subject]. [setting].
+[composition]. [this world's light]. [Must].
 ```
 
 Person plates add: standing three-quarter portrait, isolated on flat
 black, one figure, no environment.
 
-Restate fixed traits on every edit. No in-image typography.
+No in-image typography.
 
-## Verify
+## Generation
 
-Describe the image before re-reading the spec. Fail if:
-
-- it reads as a different school than `lock.look.school`
-- `oil-box` is only a cracked-varnish filter on a photo
-- a person plate has a full environment behind the figure
-- it could be another world's city
-- the entry face drifted
-- all counted plates share one ratio
-- a caption is missing
-- a signature is a generic MacGuffin
-- the plate refuses the locked surface
-- a second live style-anchor sits beside the canonical one
-
-One retry, then keep and flag.
-
-Run `{SKILL_ROOT}/scripts/validate.py <world-root>` before W5 accept.
+`/world-bible-art` only. Order, edit-chain, and image verify live there.
+W5 does not load the `imagine` skill.

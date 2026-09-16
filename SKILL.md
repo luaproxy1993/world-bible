@@ -1,23 +1,25 @@
 ---
 name: world-bible
 description: >
-  Turn multimodal seeds into a modular game World Bible (temperament, stage,
-  timeline, art plates). Use when the user runs /world-bible, says World Bible,
-  WB, 世界圣经, 世界观设定, or wants a world alignment doc before an FMV, RPG,
-  TCG, or Doki pack.
+  Turn multimodal seeds into a modular game World Bible (temperament, scale,
+  stage, timeline, art registry — no pic gen). Use when the user runs
+  /world-bible, says World Bible, WB, 世界圣经, 世界观设定, or wants a world
+  alignment doc before an FMV, RPG, TCG, or Doki pack. Pictures are
+  /world-bible-art.
 argument-hint: "[world_path] [new|lock|ingest|world|stage|timeline|art|compile]"
 user-invocable: true
 metadata:
   short-description: Modular game World Bible generator
-  version: "1.8.0"
-  feeds: "doki-game-maker, galgame-maker, rpg-campaign-maker, game-maker-pipeline"
+  version: "1.9.0"
+  feeds: "doki-game-maker, galgame-maker, rpg-campaign-maker, game-maker-pipeline, world-bible-art"
 ---
 
 # World Bible
 
-A World Bible is the **seed** a team aligns on before anyone builds a game:
-temperament, stage, timeline, art. Modular, editable, genre-agnostic.
-Downstream maker skills consume it.
+A World Bible is the **stage document** a team aligns on before anyone
+builds a game: temperament, scale, stage, timeline, art registry.
+Modular, editable, genre-agnostic. Downstream maker skills consume it.
+Pictures are `/world-bible-art`, not this pipeline.
 
 Default audience: **North America / Europe**. Default language: **English**
 in every JSON field, caption, overview, and compile. Another language only
@@ -53,9 +55,11 @@ intake (script / homage / image / audio / pitch)
   → lock (temperament + story window + signature + look)
   → ingest (cite; extract residue)
   → world + stage + timeline (JSON vignettes)
-  → art plates
+  → art registry (no pictures)
   → compile (WORLD_BIBLE.md + overview.html from JSON)
 ```
+
+Pictures: `/world-bible-art` after W6.
 
 Load on demand:
 
@@ -63,7 +67,7 @@ Load on demand:
 - Lock JSON → `references/LOCK.md`
 - Module schemas, vignette form → `references/SPEC.md`
 - Multimodal intake → `references/INGEST.md`
-- Art plates + Imagine protocol → `references/ART.md`
+- Art registry (no pic gen) → `references/ART.md`
 - Downstream mapping → `references/HANDOFF.md`
 - Structure moves (Cyberpunk Red / WoD / GURPS / Edith / Diablo) → `references/CANON.md`
 - Tiny filled example → `references/EXAMPLE.md`
@@ -85,8 +89,20 @@ Load on demand:
 | `world` | W2 |
 | `stage` | W3 |
 | `timeline` | W4 |
-| `art` | W5 (look-dev first when `lock.look.source` is `inferred`) |
+| `art` | W5 registry only. Text look-dev if `lock.look.source` is `inferred` |
 | `compile` | W6 |
+
+## Run
+
+Read `pipeline_state.json` first. Do **only** `step`. Do not reopen ids in
+`accepted`. Do not start the next step in the same turn.
+
+- Missing lock fields: at most **three** questions, then write the lock
+  from intake and mark inferred fields.
+- Off-topic author text: one line restating the current step, then continue
+  that step.
+- `revise` + a step id reopens that step. Nothing else does.
+- After the step's files are written, **STOP** with `step W#: accept`.
 
 Session root = the world folder. Resolve: path the user named → `./<slug>` → ask.
 
@@ -108,27 +124,29 @@ every field: `references/FIELDS.md`.
 
 ## W0 · Lock
 
-**Done when** `lock.json` names three feelings, one about-sentence, the
+**Done when** `lock.json` names scale, three feelings, one about-sentence, the
 story window, the signature, IP, and look — and a stranger could quote
 the about-sentence and the look `why`.
 
 Write from `references/LOCK.md`. Fill:
 
 1. **Slug / title / language / audience**
-2. **Intake** — original | homage | book | image | audio | mixed
-3. **IP** — original | homage | unofficial remix | licensed
-4. **Temperament** — three named feelings + one sentence: *this world is about X*.
+2. **Scale** — `seed` (20–40 min) or `sitting` (~3 hours). Default `sitting`.
+   Counts: `references/LOCK.md` scale table
+3. **Intake** — original | homage | book | image | audio | mixed
+4. **IP** — original | homage | unofficial remix | licensed
+5. **Temperament** — three named feelings + one sentence: *this world is about X*.
    Name the feelings the brief actually wants, in ordinary adjectives.
-5. **Story window** — the playable present (era, start, stop). History exists
+6. **Story window** — the playable present (era, start, stop). History exists
    only as **residue** on this window
-6. **Signature** — one technology, law, resource, or curse that makes the stage
+7. **Signature** — one technology, law, resource, or curse that makes the stage
    unique and that games can mechanically touch
-7. **Look** — paint school from intake (`references/ART.md` schools).
+8. **Look** — paint school from intake (`references/ART.md` schools, by **tell**).
    `source`: `author` if the brief named a look, else `inferred`.
    Default school `oil-box` only when intake has no stronger signal
-8. **Timeline shape** — `linear` | `cyclic` | `concurrent` (worldlines)
-9. **Target forms** — FMV / RPG / TCG / Doki / unspecified. Listing a form
-   does not commit to shipping it
+9. **Timeline shape** — `linear` | `cyclic` | `concurrent` (worldlines)
+10. **Target forms** — FMV / RPG / TCG / Doki / unspecified. Listing a form
+    does not commit to shipping it
 
 Homage intake: extract temperament, spatial logic, power structure, signature
 class, look class. Write an original world. New names, new incidents, new map.
@@ -138,10 +156,11 @@ Then `pipeline_state.json`:
 ```json
 {
   "skill": "world-bible",
-  "skill_version": "1.8.0",
+  "skill_version": "1.9.0",
   "slug": "<slug>",
   "step": "W0",
-  "status": "in_progress"
+  "status": "in_progress",
+  "accepted": []
 }
 ```
 
@@ -194,8 +213,9 @@ a diary, rewrite.
 Load `references/SPEC.md` §Vignette. A vignette is a brief: what it is, who
 uses it, one dated proof of a Law. Not a short story and not a wiki infobox.
 
-Minimum ship: places 5–12, people 4–10 (mark the **entry face**), factions
-3–7, institutions as needed. Ids live on the objects. Relations are ids.
+Counts: `lock.scale` table in `references/LOCK.md` (sitting: places 10–16,
+people 8–12, factions 4–6). Mark the **entry face**. Ids live on the objects.
+Relations are ids.
 
 **STOP** — `step W3: accept`
 
@@ -204,7 +224,7 @@ Minimum ship: places 5–12, people 4–10 (mark the **entry face**), factions
 ## W4 · Timeline
 
 **Done when** `timeline/timeline.json` enumerates world-key events **and**
-the story-window slice, in the shape locked at W0.
+the story-window slice at `lock.scale` beat count, in the shape locked at W0.
 
 Load `references/SPEC.md` §Timeline.
 
@@ -221,17 +241,18 @@ relations to places / people / factions.
 
 ## W5 · Art
 
-**Done when** `art/art.json` medium matches `lock.look`, one canonical
-style-anchor exists (look-dev resolved), every counted plate has a
-caption, and the 4×3 floor is met with mixed ratios.
+**Done when** `art/art.json` is a registry: `generated` is `false`, medium
+matches `lock.look`, look-dev is resolved, every counted plate has caption
+**and** prompt, and the 4×3 floor is met with mixed ratios. **No pictures.**
 
-Load `references/ART.md`. Also load the `imagine` skill before any
-`image_gen` / `image_edit`. If `lock.look.source` is `inferred` (or the
-author asked for options), run look-dev and **STOP** for `look-dev: pick`
-before generating the twelve. Recurring subjects: one canonical plate, then
-`image_edit`. People plates are standing portraits on flat black. User-supplied
-images stay in `source/` and may become anchors; do not redraw them unless
-asked.
+Load `references/ART.md`. Do not load `imagine`. Do not call `image_gen`
+or `image_edit`. If `lock.look.source` is `inferred`, write three
+different-school `look_dev` rows and **STOP** for `look-dev: pick` before
+the plate list. User-supplied images stay in `source/` and may be listed
+as paths; do not redraw them unless asked.
+
+After W6, point the author at `/world-bible-art`. Do not start it unless
+they asked.
 
 **STOP** — `step W5: accept`
 
@@ -248,7 +269,11 @@ are regenerated from JSON.
 ```
 
 Play-seeds (SPEC §Play-seeds): how this world becomes FMV / RPG / TCG / Doki.
-Seeds are hooks, not systems.
+Seeds are hooks, not systems. Sitting scale: name enough `story_window`
+beats that a writer can hang ~3 hours.
+
+After accept, if they want pictures: `/world-bible-art`. Do not start it
+in this turn unless they asked.
 
 Load `references/HANDOFF.md` if the author names a downstream skill. Point
 them; do not start that skill's pipeline unless they asked.
@@ -267,8 +292,8 @@ them; do not start that skill's pipeline unless they asked.
 3. Every historical fact leaves residue on the playable present.
 4. The signature is mechanically touchable.
 5. Relations are ids that exist in the four JSON files.
-6. Art: 4×3 floor, mixed ratios, caption per plate, one style anchor.
-   Plates match the locked surface and `lock.look` (`references/ART.md`).
+6. Art registry: 4×3 floor, mixed ratios, caption+prompt per plate, one
+   style-anchor row. `generated` is false. Pictures are `/world-bible-art`.
 7. Hand-edits belong in JSON. `WORLD_BIBLE.md` and `overview.html` are compile-only.
 
 Homage extracts class, not copyrighted plot or names. Write the lock before
@@ -282,13 +307,14 @@ load:
   - {WORLD}/pipeline_state.json, lock.json, world/world.json   (if they exist)
   - {SKILL_ROOT}/references/INGEST.md     at W1 or when intake is not a sentence
   - {SKILL_ROOT}/references/SPEC.md       at W2–W4 and W6
-  - {SKILL_ROOT}/references/ART.md        at W5
+  - {SKILL_ROOT}/references/ART.md        at W5 (registry only)
   - {SKILL_ROOT}/references/HANDOFF.md    when a downstream skill is named
   - {SKILL_ROOT}/references/CANON.md      when prose goes generic
-  - imagine skill                         before any image_gen / image_edit
 preflight:
-  - slug and story window exist, or this is W0
+  - slug, scale, and story window exist, or this is W0
   - JSON folders are the editing surface; WORLD_BIBLE.md / overview.html are not
+  - do only pipeline_state.step; do not generate images
 ```
 
+On accept: append the step to `accepted`, set `step` to the next id.
 `todo_write` tracks W0–W6. Checkpoint → `pipeline_state.json`.

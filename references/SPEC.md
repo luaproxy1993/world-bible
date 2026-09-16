@@ -97,7 +97,7 @@ Out: creation myths with no residue, other continents, system math.
 }
 ```
 
-Each array is vignettes. Minimum: places 5–12, people 4–10, factions 3–7, institutions as needed. A place names who uses it. A person names where they stand. A faction names the streets it walks.
+Each array is vignettes. Counts: `lock.scale` table in `LOCK.md`. A place names who uses it. A person names where they stand. A faction names the streets it walks.
 
 ---
 
@@ -127,7 +127,7 @@ Event:
 }
 ```
 
-`world_key` = events that created present residue. `story_window` = the stretch a game occupies.
+`world_key` = events that created present residue. `story_window` = the stretch a game occupies. Beat count: `lock.scale` in `LOCK.md`.
 
 - `linear` — dated `when`
 - `cyclic` — `when` is a beat; add `returns` / `changes`
@@ -137,16 +137,18 @@ Event:
 
 ## Art (`art/art.json`)
 
-See `ART.md` for generation. `medium` is the stem for `lock.look.school`. One canonical `kind: anchor`. Look-dev plates do not count. Schema:
+See `ART.md` for the registry. `medium` is the stem for `lock.look.school`. One canonical `kind: anchor` row. `generated` is false until `/world-bible-art`. Schema:
 
 ```json
 {
   "schema": "doki.world-bible.art",
-  "version": "1.1.0",
+  "version": "1.2.0",
+  "generated": false,
   "style_sentence": "",
   "palette": [{"name": "", "hex": "", "use": ""}],
   "light": "",
   "medium": "",
+  "look_dev": [],
   "plates": []
 }
 ```
@@ -161,11 +163,12 @@ Plate:
   "path": "art/scenes/.png",
   "title": "",
   "caption": "what the picture is showing. SKILL.md Voice",
+  "prompt": "owned 2–5 sentences; starts with school tell + medium stem",
   "subject_id": "place."
 }
 ```
 
-Floor: 4 kinds × 3 plates = **12**. Distinct `aspect_ratio` among those 12: **≥ 4**. Caption required. Cover/anchor/look-dev extras allowed.
+Floor: 4 kinds × 3 plates = **12**. Distinct `aspect_ratio` among those 12: **≥ 4**. Caption and prompt required. Cover/anchor extras allowed. Files are not required until `generated` is true.
 
 ---
 
@@ -189,4 +192,4 @@ Hooks, not systems. At least one form filled.
 }
 ```
 
-A seed that invents a new city or a mechanic the Laws do not support is a bug.
+A seed that invents a new city or a mechanic the Laws do not support is a bug. Sitting scale: FMV or RPG names enough `story_window` beats that a writer can hang ~3 hours. Hooks, not a script.

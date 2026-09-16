@@ -3,10 +3,26 @@
 Write `lock.json` at the world root. Empty fields mean the world is not locked.
 
 `audience` defaults to North America / Europe. `language` defaults to `en`.
+`scale` defaults to `sitting` (~3 hours of play).
 
-**Look** is the paint school. Judge it from intake at W0. Schools, medium stems, and look-dev live in `ART.md`. Copy `school` from that list.
+## Scale (volume)
 
-- `source`: `author` when the brief named a look (a painter, a show, "box art", "dating-show glossy", a film still). `inferred` when you chose from temperament.
+One bible covers one scale. A season is several sitting bibles, not one fat folder.
+
+| `scale` | Play time | places | people | factions | `story_window` beats |
+|---------|-----------|--------|--------|----------|----------------------|
+| `seed` | 20–40 min | 5–8 | 4–6 | 3–4 | 6–10 |
+| `sitting` | ~3 hours | 10–16 | 8–12 | 4–6 | 14–22 |
+
+Counts are inclusive ranges. W3 / W4 must land inside the locked scale. `world_key` is residue history (as many as leave a mark). The 3-hour script hangs on `story_window`, not on `world_key`.
+
+A vignette is a brief, not a scene script. Volume is more rooms, faces, and beats — not longer bodies.
+
+## Look
+
+Paint school from intake at W0. Schools, stems, and contrast live in `ART.md`. Copy `school` from that list.
+
+- `source`: `author` when the brief named a look. `inferred` when you chose from temperament.
 - Default `school` is `oil-box` only when intake has no stronger signal.
 - `why` is one sentence a stranger could quote.
 - `forbidden` starts from the school's row in `ART.md`, then add what this world must not look like.
@@ -15,7 +31,7 @@ Write `lock.json` at the world root. Empty fields mean the world is not locked.
 ```json
 {
   "schema": "doki.world-bible.lock",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "slug": "",
   "title": "",
   "language": "en",
@@ -23,6 +39,7 @@ Write `lock.json` at the world root. Empty fields mean the world is not locked.
   "intake": "original",
   "ip": "original",
   "homage_source": "n/a",
+  "scale": "sitting",
   "temperament": {
     "feelings": [
       {"name": "", "lived": ""},

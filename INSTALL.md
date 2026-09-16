@@ -1,4 +1,4 @@
-# Install — world-bible v1.8.0
+# Install — world-bible v1.9.0
 
 ## The one command
 
