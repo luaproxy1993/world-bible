@@ -1,4 +1,4 @@
-# World Bible spec
+# Core Rule Book spec
 
 JSON in these folders is what you edit. `WORLD_BIBLE.md` and
 `overview.html` are compiled. Do not hand-edit them.

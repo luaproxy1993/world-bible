@@ -23,6 +23,6 @@ if command -v sed >/dev/null; then
 fi
 
 echo "Scaffolded $DEST"
-echo "Next: write lock.json, then /world-bible lock"
+echo "Next: write lock.json, then /core-rule-book lock"
 echo "Validate: $SKILL_ROOT/scripts/validate.py $DEST"
 echo "Compile:  $SKILL_ROOT/scripts/compile.sh $DEST"

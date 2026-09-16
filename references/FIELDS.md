@@ -1,4 +1,4 @@
-# World Bible · field sheet
+# Core Rule Book · field sheet
 
 One folder = one core rule book. Canonical text is **JSON**. Default
 language **English**. Maker skills consume it. Pictures: `/world-bible-pack`.

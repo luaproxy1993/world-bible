@@ -59,7 +59,7 @@ def labels(lang: str) -> dict:
     zh = (lang or "zh").lower().startswith("zh")
     if zh:
         return {
-            "kicker": "World Bible",
+            "kicker": "Core Rule Book",
             "nav": ["世界", "怎么玩", "玩具箱", "时间线", "画风"],
             "roles": "能当谁",
             "power": "难度",
@@ -361,7 +361,7 @@ def write_overview(root: Path) -> Path:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{e(title)} · World Bible</title>
+<title>{e(title)} · Core Rule Book</title>
 <style>{css}
 :root {{ {palette_css(art)} }}
 </style>

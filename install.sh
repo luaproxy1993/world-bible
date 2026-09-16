@@ -67,8 +67,8 @@ fi
 
 VERSION="$(cat "$SCRIPT_DIR/VERSION" 2>/dev/null || echo unknown)"
 echo ""
-echo "world-bible v${VERSION}  (text only)"
-echo "In the agent: /world-bible"
+echo "core-rule-book v${VERSION}  (text only; old name world-bible)"
+echo "In the agent: /core-rule-book"
 echo "Pictures:     npx skills add luaproxy1993/world-bible-pack -y"
 echo "Update: npx skills add luaproxy1993/world-bible -y"
 echo "        or git -C ~/.grok/skills/world-bible pull"

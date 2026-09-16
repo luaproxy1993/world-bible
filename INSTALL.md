@@ -1,4 +1,4 @@
-# Install — world-bible v3.0.0
+# Install — core-rule-book v3.1.0
 
 ## The one command
 
@@ -44,7 +44,7 @@ test -f ~/.grok/skills/world-bible/SKILL.md && echo grok-ok
 cat ~/.grok/skills/world-bible/VERSION
 ```
 
-Then in the agent: `/world-bible`.
+Then in the agent: `/core-rule-book` (old `/world-bible` still routes here).
 
 Pictures are a later session (separate skill):
 

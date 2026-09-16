@@ -1,26 +1,26 @@
 ---
-name: world-bible
+name: core-rule-book
 description: >
-  Turn multimodal seeds into a TRPG core rule book (CRB) in text: world,
-  roles, local conflict, economy, opposition, famous faces, places, gear,
-  timeline, written art look. Shared substrate for later campaigns, like
-  D&D under Baldur's Gate. Not a campaign and not pictures. Use when the
-  user runs /world-bible, says World Bible, WB, 世界圣经, core rule book,
-  CRB, 核心规则书. Campaigns are /rpg-campaign-maker. Pictures are
-  /world-bible-pack.
+  Core rule book (CRB) in text from multimodal seeds: world, roles, local
+  conflict, economy, opposition, famous faces, places, gear, timeline,
+  written art look. Shared substrate for later campaigns, like D&D under
+  Baldur's Gate. Not a campaign and not pictures. Use when the user runs
+  /core-rule-book, /crb, /world-bible, says core rule book, CRB, 核心规则书,
+  World Bible, WB, 世界圣经. Campaigns are /rpg-campaign-maker. Pictures
+  are /world-bible-pack.
 argument-hint: "[world_path] [new|lock|ingest|primer|box|timeline|look|compile]"
 user-invocable: true
 metadata:
   short-description: Modular game core rule book generator
-  version: "3.0.0"
+  version: "3.1.0"
   feeds: "doki-game-maker, galgame-maker, rpg-campaign-maker, game-maker-pipeline, world-bible-pack"
 ---
 
-# World Bible
+# Core Rule Book
 
-A World Bible is a **core rule book** in text. Baldur's Gate 1, 2, and 3
+This skill writes a **core rule book** in text. Baldur's Gate 1, 2, and 3
 all sit on one D&D core book; each generation's authors then cut their own
-story from that shared box. This folder is that box.
+story from that shared box. This folder is that box. Old name: World Bible.
 
 It holds: the world today, who you can be, how trouble is resolved here,
 wages and prices, who can hurt you, famous faces, places, gear, a timeline,
@@ -109,10 +109,12 @@ Load on demand:
 ## Commands
 
 ```
-/world-bible
-/world-bible new <slug>
-/world-bible lock | ingest | primer | box | timeline | look | compile
+/core-rule-book
+/core-rule-book new <slug>
+/core-rule-book lock | ingest | primer | box | timeline | look | compile
 ```
+
+`/world-bible` and `/crb` are the same skill.
 
 | Arg | Action |
 |-----|--------|
@@ -191,8 +193,8 @@ Then `pipeline_state.json`:
 
 ```json
 {
-  "skill": "world-bible",
-  "skill_version": "3.0.0",
+  "skill": "core-rule-book",
+  "skill_version": "3.1.0",
   "slug": "<slug>",
   "step": "W0",
   "status": "in_progress",

@@ -1,6 +1,6 @@
 # Canon — what to steal
 
-This World Bible is a **core rule book**: a toy box. Steal chapter *moves*
+This file is a **core rule book**: a toy box. Steal chapter *moves*
 from these books, not their worlds or their math.
 
 A core book has: the world today, who you can be, how a fight works here,

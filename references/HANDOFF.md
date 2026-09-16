@@ -19,7 +19,7 @@ WB is the pack's alignment seed. Pack shape stays `doki-game-maker`.
 
 Do not copy WB prose into `r1_world.world_setting`. Two–four concrete scene sentences.
 
-If the pack has no temperament lock, run `/world-bible` first rather than a one-page `docs/WORLD_BIBLE.md`.
+If the pack has no temperament lock, run `/core-rule-book` first rather than a one-page `docs/WORLD_BIBLE.md`.
 
 ## galgame-maker
 
@@ -60,7 +60,7 @@ WB is text. This skill writes `pack/` pictures.
 | `stage.places` | location plates + one playable-window map |
 | `signature` + ordinary objects | props in use |
 
-Do not start `/world-bible-pack` from `/world-bible` unless the author asked
+Do not start `/world-bible-pack` from `/core-rule-book` unless the author asked
 in this turn. Pictures are a later session.
 
 ## game-maker-pipeline
@@ -77,7 +77,7 @@ Ad-hoc pic gen from WB plates as final assets is out. Production still goes thro
 
 ## dokiimport
 
-A World Bible is content. An App SDK `manifest.json` with `kind: "world"` is a runtime envelope. Do not treat the bible folder as a deliverable world app.
+A Core Rule Book folder is content. An App SDK `manifest.json` with `kind: "world"` is a runtime envelope. Do not treat the CRB folder as a deliverable world app.
 
 ## What stays in the WB folder
 

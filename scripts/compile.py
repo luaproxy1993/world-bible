@@ -59,7 +59,7 @@ def main(root: Path) -> None:
     out: list[str] = [
         "<!-- compiled from JSON folders — edit JSON, then world-bible/scripts/compile.sh -->",
         "",
-        f"# {title} · World Bible",
+        f"# {title} · Core Rule Book",
         "",
         f"> slug `{slug}` · regenerate this file; do not hand-edit",
         "",

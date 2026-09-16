@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.0
+
+The skill's name is **Core Rule Book**. Slash command: `/core-rule-book`.
+`/world-bible`, WB, and 世界圣经 still route here. Install path and GitHub
+repo stay `luaproxy1993/world-bible` so existing `npx skills add` keeps working.
+JSON schemas stay `doki.world-bible.*`. Compiled filename stays `WORLD_BIBLE.md`.
+
 ## 3.0.0
 
 The bible is a **core rule book**, not a thin setting doc.

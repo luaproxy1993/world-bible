@@ -10,7 +10,7 @@ Baldur's Gate campaign. This folder is that box.
 
 ```text
 intake
-  → /world-bible              CRB. Text only. Stops at W6.
+  → /core-rule-book           CRB. Text only. Stops at W6.
        │
        ├─ /world-bible-pack         pictures (portraits, map, places, props)
        ├─ /rpg-campaign-maker       one job: one site, one clock, one fork
