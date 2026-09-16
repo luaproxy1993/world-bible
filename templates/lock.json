@@ -1,0 +1,41 @@
+{
+  "schema": "doki.world-bible.lock",
+  "version": "1.2.0",
+  "slug": "{{SLUG}}",
+  "title": "",
+  "language": "en",
+  "audience": "North America / Europe",
+  "intake": "original",
+  "ip": "original",
+  "homage_source": "n/a",
+  "temperament": {
+    "feelings": [
+      {"name": "", "lived": ""},
+      {"name": "", "lived": ""},
+      {"name": "", "lived": ""}
+    ],
+    "about": ""
+  },
+  "story_window": {
+    "era": "",
+    "start": "",
+    "playable_present": "",
+    "stop": ""
+  },
+  "signature": {
+    "working_name": "",
+    "everyday": "",
+    "play": ""
+  },
+  "look": {
+    "school": "oil-box",
+    "named_as": "",
+    "why": "",
+    "forbidden": [],
+    "source": "inferred"
+  },
+  "timeline_shape": "linear",
+  "worldlines": [{"id": "prime", "name": "", "status": "canonical"}],
+  "target_forms": [],
+  "intake_pointers": ["source/"]
+}

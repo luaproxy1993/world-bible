@@ -1,0 +1,13 @@
+{
+  "schema": "doki.world-bible.play-seeds",
+  "version": "1.1.0",
+  "fmv": "",
+  "rpg": "",
+  "tcg": "",
+  "doki": {
+    "entry_face": "",
+    "tagline": "",
+    "world_setting": "",
+    "three_minute_accept": ""
+  }
+}
