@@ -1,179 +1,148 @@
 # World Bible spec
 
-Canonical text is JSON in four folders. `WORLD_BIBLE.md` and `overview.html` are compile-only.
+JSON in four folders is what you edit. `WORLD_BIBLE.md` and `overview.html`
+are compiled. Do not hand-edit them.
 
 ```text
 world/world.json
 stage/stage.json
 timeline/timeline.json
-art/art.json          + art/{scenes,people,props,signature}/
+art/art.json
 ```
 
-Ids live on objects. An id that is related but missing is a bug.
-
-`timeline_shape`: `linear` | `cyclic` | `concurrent`.
-
-Id prefix: `place.` `person.` `faction.` `institution.` `signature.` `event.` `art.`
-
-Art `kind`: `scene` | `person` | `prop` | `signature` (count toward 4×3). Extras: `cover` | `anchor` | `look-dev`.
+Every id you mention must exist. Prefix: `place.` `person.` `faction.`
+`institution.` `signature.` `event.`
 
 ---
 
-## Vignette (JSON)
+## Brief (`vignette`)
 
-Writing unit for places, people, factions, institutions, signature.
+One object on the stage: a place, a person, a faction, an institution,
+or the unique thing. Not a wiki card. Not a short story.
 
 ```json
 {
   "id": "place.",
   "kind": "place",
-  "title": "Name, role, when",
-  "body": "120–250 words. What it is, who uses it, one dated incident that proves a Law. SKILL.md Voice.",
-  "residue": "what this leaves on the playable present",
+  "title": "Name, job or use, when",
+  "body": "sitting: 220–400 words. seed: 150–250. Answer every slot below.",
+  "residue": "what this still does to people in the playable present",
   "relations": ["person.", "signature."],
-  "play_hook": "one thing a designer can stage tomorrow"
+  "play_hook": "one scene a designer can run tomorrow, using only ids in this bible"
 }
 ```
 
-People titles: `Name, age or office, year or beat`. Places: a tour stop, not a wiki name. Factions name a behaviour. Default language: English. Density: `references/EXAMPLE.md`.
-
-**Specificity test.** Swap proper nouns for another genre; if the paragraph still works, rewrite.
-
-**Play-hook test.** A designer can start a scene from this object without inventing a new location or person.
-
-**Voice test.** SKILL.md Voice. If you reread it, look up a word, or it reads as a diary, rewrite.
+**Slot test.** If a required slot is missing, the brief is not done.
+**Swap test.** Replace the proper names with another genre. If the paragraph
+still works, it is too generic. Rewrite.
+**Hook test.** A designer can start a scene without inventing a new room or person.
+**Voice test.** SKILL.md Voice. If you reread it, look up a word, or it reads
+as a diary, rewrite.
 
 Entry face: exactly one `person.*` in `world.json` → `entry_face`.
+
+### Place slots (every `places[]` item)
+
+1. What this place is, in one sentence.
+2. Who may enter, who may not, and which door they use.
+3. Hours: when it is open, when it is empty.
+4. A price, a ticket, a stamp, or a free rule.
+5. How the unique thing (`signature`) shows up in this room.
+6. One dated incident (year or season) that proves a Law.
+7. Which other ids you can walk to from here.
+
+### Person slots (every `people[]` item)
+
+1. Name, age, job.
+2. Where they stand on a normal day (a `place.*` id).
+3. What they can give, sell, stamp, or refuse.
+4. How the unique thing touches them (bag, body, pay, door).
+5. One dated incident.
+6. Who they deal with (ids, not adjectives).
+
+### Faction slots
+
+1. What they do this year, not their myth.
+2. Which streets or rooms they walk (`place.*`).
+3. Who they can help or hurt, and with what permission.
+4. What they control that a player can steal, stop, or buy.
+5. One dated incident this window.
+
+### Institution slots
+
+1. The public rule (sign, ticket, stamp, posted notice).
+2. Who enforces it.
+3. What happens if you break it this year.
+4. One dated proof it still holds.
 
 ---
 
 ## World (`world/world.json`)
 
-```json
-{
-  "schema": "doki.world-bible.world",
-  "version": "1.1.0",
-  "slug": "",
-  "title": "",
-  "language": "en",
-  "ip": "original",
-  "entry_face": "person.",
-  "signature_id": "signature.",
-  "uniqueness": "",
-  "temperament": {
-    "feelings": [
-      {"name": "", "lived": ""},
-      {"name": "", "lived": ""},
-      {"name": "", "lived": ""}
-    ],
-    "about": ""
-  },
-  "window": {"era": "", "start": "", "playable_present": "", "stop": ""},
-  "laws": [{"id": "law.1", "text": ""}],
-  "everyday": {
-    "eat": "", "pay": "", "move": "", "sleep": "", "die": "", "news": ""
-  },
-  "signature": { },
-  "slang": [{"term": "", "meaning": ""}]
-}
-```
+A teammate reads this aloud in about four minutes and can run a scene.
 
-`signature` is a vignette object. Laws are commandments a local would know (3–7). Everyday: eat, pay, move, sleep, die, get news.
+| Field | Dig until |
+|-------|-----------|
+| `uniqueness` | 280–450 words. Era look, who has power, how the unique thing shows up on a street, what a visitor gets wrong on day one. |
+| `laws[]` | 3–7. Each is if/then a local knows, **plus** what breaking it costs this year. 2–4 sentences. |
+| `everyday` | `eat` `pay` `move` `sleep` `die` `news`. Each key: 3–5 sentences with a price, a time, or a `place.*`. |
+| `signature` | A brief (same slots as above). Procedure: how you get it, how you use it, how it fails. |
+| `slang[]` | Optional. About 12 terms. `term` in local speech, `meaning` in ordinary English. |
 
-Out: creation myths with no residue, other continents, system math.
+Out: creation myths with no mark on today, other continents, system math.
 
 ---
 
 ## Stage (`stage/stage.json`)
 
-```json
-{
-  "schema": "doki.world-bible.stage",
-  "version": "1.1.0",
-  "places": [],
-  "people": [],
-  "factions": [],
-  "institutions": []
-}
-```
+Counts: `lock.scale` in `LOCK.md`. Every item is a brief with **all** slots filled.
 
-Each array is vignettes. Counts: `lock.scale` table in `LOCK.md`. A place names who uses it. A person names where they stand. A faction names the streets it walks.
+A place names who uses it. A person names where they stand. A faction names
+the streets it walks this year.
 
 ---
 
 ## Timeline (`timeline/timeline.json`)
 
-```json
-{
-  "schema": "doki.world-bible.timeline",
-  "version": "1.1.0",
-  "shape": "linear",
-  "worldlines": [{"id": "prime", "name": "", "status": "canonical"}],
-  "world_key": [],
-  "story_window": []
-}
-```
+`world_key` = older facts that still mark today. As many as leave a mark.
+`story_window` = the stretch a game occupies. Beat **count** is `lock.scale`.
 
-Event:
+Each `story_window` beat body: **4–7 sentences**. Must name:
 
-```json
-{
-  "id": "event.",
-  "when": "dated beat or cyclic return",
-  "title": "",
-  "residue": "",
-  "relations": ["place."],
-  "body": "2–4 sentences. Tables without bodies are a date list."
-}
-```
+1. When.
+2. Where (`place.*`).
+3. Who is on stage (`person.*` or `faction.*`).
+4. What changes.
+5. What is left for the next beat (`residue`).
 
-`world_key` = events that created present residue. `story_window` = the stretch a game occupies. Beat count: `lock.scale` in `LOCK.md`.
-
-- `linear` — dated `when`
-- `cyclic` — `when` is a beat; add `returns` / `changes`
-- `concurrent` — add `worldline` per event, plus optional `comparison[]` rows `{ "event_id", "lines": { "prime": "", "ash": "" }, "shared_residue" }`
+A table with no bodies is a date list. Rewrite.
 
 ---
 
-## Art (`art/art.json`)
+## Art look (`art/art.json`)
 
-See `ART.md`. Written look only. Pictures are `/world-bible-pack`. Schema:
+Words only. Pictures are `/world-bible-pack`. See `ART.md` for schools.
 
-```json
-{
-  "schema": "doki.world-bible.art",
-  "version": "1.3.0",
-  "style_sentence": "",
-  "palette": [{"name": "", "hex": "", "use": ""}],
-  "light": "",
-  "medium": "",
-  "look_dev": [],
-  "subjects": []
-}
-```
+Fill:
 
-`subjects[]` optional: `{ "id", "kind", "subject_id", "caption" }`. If empty, the pack skill derives people, places, and signature from stage.
+| Field | Dig until |
+|-------|-----------|
+| `medium` | The school stem from `ART.md`, verbatim. |
+| `style_sentence` | One line: what you see in a thumbnail + this world's clothes and buildings. |
+| `palette[]` | 5–8 pigments, each with `use` on a real surface (wool, brick, lamp). |
+| `light` | Who lights a street and a room. 3–6 sentences. |
+| `wardrobe` | 80–150 words. What people wear at work and after hours. |
+| `buildings` | 80–150 words. Wood, brick, stone, glass — what a camera would hit. |
+| `look_dev[]` | Only if the look was inferred. Three **different** schools. |
+
+`subjects[]` optional captions for the pack skill. If empty, the pack reads stage.
 
 ---
 
 ## Play-seeds (`play-seeds.json`)
 
-Hooks, not systems. At least one form filled.
+Hooks, not a script. At least one form filled.
 
-```json
-{
-  "schema": "doki.world-bible.play-seeds",
-  "version": "1.1.0",
-  "fmv": "",
-  "rpg": "",
-  "tcg": "",
-  "doki": {
-    "entry_face": "",
-    "tagline": "",
-    "world_setting": "",
-    "three_minute_accept": ""
-  }
-}
-```
-
-A seed that invents a new city or a mechanic the Laws do not support is a bug. Sitting scale: FMV or RPG names enough `story_window` beats that a writer can hang ~3 hours. Hooks, not a script.
+Sitting scale: FMV or RPG names enough `story_window` beats that a writer
+can hang about 3 hours. A seed that invents a new city or a rule the Laws
+do not support is a bug.

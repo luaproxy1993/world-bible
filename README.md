@@ -25,7 +25,7 @@ npx skills add luaproxy1993/world-bible -y
 
 Update: same command, or `git -C ~/.grok/skills/world-bible pull`.
 
-Current: **1.10.0**.
+Current: **1.11.0**.
 
 ## New world
 

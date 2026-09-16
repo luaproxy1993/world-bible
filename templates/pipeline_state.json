@@ -1,6 +1,6 @@
 {
   "skill": "world-bible",
-  "skill_version": "1.10.0",
+  "skill_version": "1.11.0",
   "slug": "{{SLUG}}",
   "step": "W0",
   "status": "in_progress",

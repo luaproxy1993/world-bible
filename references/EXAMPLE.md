@@ -1,51 +1,50 @@
 # Miniature example (original)
 
-Match density and Voice (manual). Not a world to copy. Homage class: a harbor that runs on oil from stranded sea animals.
+Match **slot coverage** and Voice (manual). Not a world to copy. Homage
+class: a harbor that runs on oil cooked from stranded sea animals.
 
 ## Lock (excerpt)
 
 Feelings: **Wet, Official, Risky.**
 About: *This world is about a city that burns oil cooked from stranded sea animals.*
-Signature: **lamp-oil** — it lights houses, runs machines, and the church controls the stamps on the bottles.
+The unique thing: **lamp-oil** — it lights houses, runs machines, and the church controls the stamps on the bottles.
 Window: one winter in **Marrowport**, after the third mass stranding.
-Shape: linear.
-Look: `oil-box`, `inferred`. Why: wet harbor, tallow light, nineteenth-century work reads as painted box art. Forbidden: photograph, tourist watercolor.
+How long: `seed`.
+Look: `oil-box`. Why: wet harbor and tallow light read as painted box art.
 
 ## World — Laws (excerpt)
 
-1. Oil in an open lamp is public light. Oil in a sealed flask is illegal unless it has an Abbey stamp.
-2. A door that has been oiled remembers who paid. Unpaid doors stick.
-3. If you say the animals' names on the dock, the next tide comes in higher.
+1. Oil in an open lamp is public light. Oil in a sealed flask is illegal unless it has an Abbey stamp. An unstamped flask seized at a door costs the carrier a night in the hymn-house cellar.
+2. A door that has been oiled remembers who paid. Unpaid doors stick. A stuck door is a public record of a missed stamp.
+3. If you say the animals' names on the dock, the next tide comes in higher. Last winter a clerk said a name; the quay flooded to the second step.
 
-## Vignette — place
+## Brief — place
 
 ### The North Try-Pots, render yard, this winter
 
-The North Try-Pots is the yard that supplies house lamps. The pots have boiled for eleven years. Workers in waxed aprons stir a kettle the color of weak tea. Steam leaves salt on the brick. On stranding days, flask carts line up past the church. Children buy stoppered bottles for the house lamp. The Abbey stamp on the cork makes the oil legal. Last week a pot cracked and the alley glowed until dawn. The glass was not swept. Shoes still come away amber.
+The North Try-Pots is the yard that supplies house lamps for Marrowport. Workers in waxed aprons enter by the alley gate from dawn to the second bell. Children may buy at the flask window. Abbey clerks may walk the kettle floor. Unstamped flasks are not sold. The pots have boiled for eleven years. A day's flask costs two dock tokens with an Abbey stamp on the cork. Steam leaves salt on the brick. On stranding days, carts line up past the church. Last week a pot cracked. The alley glowed until dawn. The glass was not swept. Shoes still come away amber. Lamp-oil is public in an open kettle here and illegal in a sealed flask without a stamp. From the alley you can walk to the hymn-house and the dock.
 
-- **Residue:** the alley still glows; house lamps depend on this yard
-- **Relations:** `signature.lamp-oil` `faction.abbey` `place.hymn-house`
-- **Play hook:** steal an unstamped flask during a pour, or follow the amber alley under the pots
+- **What this still does:** the alley still glows; house lamps depend on this yard
+- **Ids:** `signature.lamp-oil` `faction.abbey` `place.hymn-house`
+- **Scene you can run:** steal an unstamped flask during a pour, or follow the amber alley under the pots
 
-## Vignette — person
+## Brief — person
 
 ### Sister Cald, 44, keeps the stamps
 
-Sister Cald keeps the Abbey stamps. She was a dock clerk before the Abbey took the oil. Every flask is a line in a book that smells of fish glue. Her right glove is always dark. She will sell a stamp for a name she can hide in the book. She does not take money. At dusk she lights two lamps, one legal and one not, and reads by the illegal one because it burns steadier. That second lamp is how you know she will deal.
+Sister Cald keeps the Abbey stamps at the hymn-house desk from first bell to dusk. She was a dock clerk before the Abbey took the oil. Every flask is a line in a book that smells of fish glue. Her right glove is always dark. She can sell a stamp, refuse a stamp, or hide a name in the book. She does not take money. She takes a name. Lamp-oil touches her every hour: legal oil in the desk lamp, illegal oil in the lamp she reads by after dusk because it burns steadier. That second lamp is how you know she will deal. Last month she stamped a flask for a dock name she later buried in the book.
 
-- **Residue:** stamps can be faked if you know her price
-- **Relations:** `faction.abbey` `signature.lamp-oil` `place.north-try-pots`
-- **Play hook:** trade a secret for a stamp, or notice which lamp she reads by
+- **What this still does:** stamps can be faked if you know her price
+- **Ids:** `faction.abbey` `signature.lamp-oil` `place.north-try-pots`
+- **Scene you can run:** trade a secret for a stamp, or notice which lamp she reads by
 
-## Timeline — linear (excerpt)
+## Timeline (excerpt)
 
-| When | Event | Residue | Ids |
-|------|-------|---------|-----|
+| When | Event | What it still does | Ids |
+|------|-------|--------------------|-----|
 | 11 years ago | First industrial stranding; Abbey takes the render | pots have not gone cold | `event.first-beaching` |
 | This winter | Third stranding; a pot cracks | amber alley | `event.third-beaching` `place.north-try-pots` |
 
-## Play-seed — Doki (excerpt)
+This winter's beat: the pot cracked at the North Try-Pots after the third stranding. Sister Cald was on the desk. Unstamped flasks went into the alley glow. House lamps still depend on that yard.
 
-Entry face: `person.sister-cald`. Tagline: *The stamp on your lamp is the law.* Setting: winter Marrowport dock, try-pot steam, salt brick, two lamps in a clerk's window, one burning too steady. 3-minute accept: the player can buy a stamp, steal one, or refuse, and the room lighting changes.
-
-Voice note: this is as fancy as the prose should get. A brief, not a diary.
+Voice note: this is as fancy as the prose should get. Answer the slots. Do not write a diary.

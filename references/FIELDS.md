@@ -23,10 +23,10 @@ Every story object (place, person, faction, institution, signature, event) uses 
 | `id` | Stable id (`place.north-try-pots`, `person.sister-cald`) |
 | `kind` | `place` / `person` / `faction` / `institution` / `signature` / `event` |
 | `title` | Name + role + when |
-| `body` | 120–250 words: what it is, who uses it, one dated proof of a Law. SKILL.md Voice |
-| `residue` | What this leaves on the playable present |
+| `body` | sitting 220–400 words. Answers every slot in `SPEC.md` |
+| `residue` | What this still does to people now |
 | `relations` | Other ids, not adjectives |
-| `play_hook` | One thing a designer can stage tomorrow |
+| `play_hook` | One scene a designer can run tomorrow |
 
 ---
 
@@ -94,9 +94,11 @@ Concurrent extras: `worldline`, optional `comparison[]`.
 
 | Field | What it is |
 |-------|------------|
-| `style_sentence` | School tell + locked surface + composition (`ART.md`) |
+| `style_sentence` | What you see small + clothes and buildings |
 | `palette[]` | 5–8 colors: `name` `hex` `use` |
-| `light` | Who lights the world |
+| `light` | Who lights a street and a room |
+| `wardrobe` | Work clothes and after-hours clothes |
+| `buildings` | Wood, brick, stone, glass |
 | `medium` | Stem for `lock.look.school` (`ART.md`) |
 | `look_dev[]` | Text candidates when look is inferred. Different schools |
 | `subjects[]` | Optional captions for `/world-bible-pack`. Else the pack reads stage |

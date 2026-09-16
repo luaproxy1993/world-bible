@@ -20,7 +20,7 @@ school. It may not change school.
 Thumbnail test: two schools must remain distinct at postage-stamp size.
 If a sentence could pass for another school, rewrite it.
 
-| school | Tell | Medium stem | Must | Forbidden |
+| school | What you see small | Medium stem | Must include | Never |
 |--------|------|-------------|------|-----------|
 | `oil-box` | Impasto bricks of paint; graphic figure-in-frame; 1990s painted game box | Oil on canvas, painted 1990s Japanese game box, Ayami Kojima / Symphony of the Night school: thick visible impasto, glaze, varnish, graphic figure-in-frame. | Visible brush ridges. Box-art composition. Painted, not filmed. | Photograph, lens bokeh, skin pores, cel contour, etching hatch, 3D render, cinematic color grade |
 | `glossy-photo` | Catchlights; magazine skin; shallow depth of field | Glossy editorial photograph, 85mm, catchlights in eyes, magazine-ready skin, commercial strobe or golden-hour key. Camera, not a brush. | Photographic grain or sharpness. Real skin. Depth of field. | Brushstrokes, oil glaze, cel outline, woodcut, painterly canvas, 3D render |
@@ -28,7 +28,7 @@ If a sentence could pass for another school, rewrite it.
 | `cel` | Hard black contour; flat fills; no pores | Hand-painted animation cel: hard ink contour, flat color fields, graphic figure-in-frame, no photographic texture. | Closed outlines. Flat or simple cel shade. | Photoreal skin, oil brush, film grain, etching, 3D render |
 | `print` | Limited inks; hatch or plate bite; paper tooth | Ink print, woodcut or copper etching: limited inks, visible hatch or plate bite, paper tooth, graphic figure-in-frame. | Hatch or carved edge. Few inks. Print, not paint. | Continuous-tone photo, oil glaze, cel candy color, digital-painting gloss, 3D render |
 
-Map intake to a school by **tell**, not by mood. A dating-show brief is
+Pick the school by **what you see small**, not by mood. A dating-show brief is
 `glossy-photo`. A cozy American Halloween is `cinematic-still`. A gothic
 painted box is `oil-box`. Cel and print only when the brief names that
 graphic tradition.
@@ -40,11 +40,13 @@ Default when intake does not name a look: `oil-box`.
 | Field | Must contain |
 |-------|----------------|
 | `medium` | The stem for `lock.look.school`. |
-| `style_sentence` | School tell + locked surface + composition. One pin-able line. |
-| `palette[]` | 5–8 named pigments: `name` `hex` `use`. |
-| `light` | Who lights the world. |
-| `look_dev[]` | Text candidates when `lock.look.source` is `inferred`. |
-| `subjects[]` | Optional. What a pack should show: entry face, key places, signature in use. |
+| `style_sentence` | What you see small + this world's clothes and buildings. One line. |
+| `palette[]` | 5–8 named pigments: `name` `hex` `use` on a real surface. |
+| `light` | Who lights a street and a room. 3–6 sentences. |
+| `wardrobe` | 80–150 words. Work clothes and after-hours clothes. |
+| `buildings` | 80–150 words. Wood, brick, stone, glass. |
+| `look_dev[]` | Three written options when the look was guessed. Different schools. |
+| `subjects[]` | Optional captions for `/world-bible-pack`. |
 
 No image paths. No `generated` flag. `/world-bible-pack` writes `pack/`.
 

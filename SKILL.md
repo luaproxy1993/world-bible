@@ -9,27 +9,35 @@ argument-hint: "[world_path] [new|lock|ingest|world|stage|timeline|art|compile]"
 user-invocable: true
 metadata:
   short-description: Modular game World Bible generator
-  version: "1.10.0"
+  version: "1.11.0"
   feeds: "doki-game-maker, galgame-maker, rpg-campaign-maker, game-maker-pipeline, world-bible-pack"
 ---
 
 # World Bible
 
-A World Bible is **text**. Temperament, scale, stage, timeline, and a
-written art look. No pictures. Modular, editable, genre-agnostic.
-Downstream skills consume it. Portraits, maps, and props are
-`/world-bible-pack`.
+A World Bible is a **text stage document**. It tells a writer and a designer
+what the world is, how long this file covers, who is on stage, what happened,
+and how pictures should look — in words. No pictures here. Portraits, maps,
+and props are `/world-bible-pack`.
 
-Default audience: **North America / Europe**. Default language: **English**
-in every JSON field, caption, overview, and compile. Another language only
-when `lock.json` `language` is set. Taste: commercial Western entertainment
-unless the lock names a different audience.
+Default reader: North America / Europe. Default language: **English** in
+every JSON field. Another language only when `lock.json` `language` is set.
 
-**Surface first.** Wardrobe, architecture, and era look like the world the
-lock named. Unique residue (the signature object, a law, a lived detail)
-sits *under* that surface. Paint school is `lock.look`, judged from
-intake at W0. Default school is oil box-art when intake does not name a
-look. Schools and look-dev: `references/ART.md`.
+Clothes, buildings, and era match the world the lock named. The unique
+thing sits under that surface, not instead of it.
+
+## Names we use
+
+Ordinary words first. The JSON key is in parentheses.
+
+- The one-page agreement (`lock`)
+- How long this bible covers (`scale`). `sitting` means about 3 hours of play
+- What this fact still does to people now (`residue`)
+- The one unique thing a game can steal, switch, or check (`signature`)
+- A short brief (`vignette`): what it is, who uses it, every slot in `SPEC.md`
+- The stretch a game occupies (`story_window`)
+- Older facts that still mark today (`world_key`)
+- How pictures should look, in words (`look`)
 
 ## Voice
 
@@ -47,12 +55,12 @@ An average US adult understands it on the first read.
 If a paragraph could be a diary, rewrite it as instructions.
 
 This is a style rule. Structure moves live in `references/CANON.md`.
-Density: `references/EXAMPLE.md`.
+How deep to dig: `references/SPEC.md`. A filled scrap: `references/EXAMPLE.md`.
 
 ```text
 intake (script / homage / image / audio / pitch)
   → lock (temperament + story window + signature + look)
-  → ingest (cite; extract residue)
+  → ingest (quote sources; note what still marks today)
   → world + stage + timeline (JSON vignettes)
   → art look (text)
   → compile (WORLD_BIBLE.md + overview.html from JSON)
@@ -136,11 +144,12 @@ Write from `references/LOCK.md`. Fill:
 4. **IP** — original | homage | unofficial remix | licensed
 5. **Temperament** — three named feelings + one sentence: *this world is about X*.
    Name the feelings the brief actually wants, in ordinary adjectives.
-6. **Story window** — the playable present (era, start, stop). History exists
-   only as **residue** on this window
-7. **Signature** — one technology, law, resource, or curse that makes the stage
-   unique and that games can mechanically touch
-8. **Look** — paint school from intake (`references/ART.md` schools, by **tell**).
+6. **Playable stretch** (`story_window`) — era, start, stop. Older facts only
+   if they still change life now
+7. **Unique thing** (`signature`) — one technology, law, resource, or curse
+   a game can steal, switch, or check
+8. **How pictures should look** (`look`) — pick a school from `ART.md` by
+   what you see small.
    `source`: `author` if the brief named a look, else `inferred`.
    Default school `oil-box` only when intake has no stronger signal
 9. **Timeline shape** — `linear` | `cyclic` | `concurrent` (worldlines)
@@ -155,7 +164,7 @@ Then `pipeline_state.json`:
 ```json
 {
   "skill": "world-bible",
-  "skill_version": "1.10.0",
+  "skill_version": "1.11.0",
   "slug": "<slug>",
   "step": "W0",
   "status": "in_progress",
@@ -183,22 +192,12 @@ original sentence already captured in the lock)
 
 ## W2 · World
 
-**Done when** `world/world.json` is an intro a new teammate could read aloud
-in three minutes and know the world's uniqueness, era, laws, everyday life,
-and signature.
+**Done when** `world/world.json` answers every World slot in `references/SPEC.md`.
+A new teammate can read it aloud in about four minutes and run a scene.
 
-Load `references/SPEC.md` §World. Write:
-
-- Uniqueness (what makes this stage this world)
-- Temperament restated as lived atmosphere
-- Story-window era
-- **Laws** — world rules that *are* gameplay
-- **Everyday life** — how people eat, pay, move, die
-- **Signature** — full vignette, not a label
-
-Specificity test: swap the proper nouns for another genre; if the paragraph
-still works, rewrite. Voice test: SKILL.md Voice. First read. If it reads as
-a diary, rewrite.
+Load `references/SPEC.md` §World. Fill uniqueness, laws (if/then + cost),
+everyday (price, time, or place in each key), and the unique thing as a
+full brief.
 
 **STOP** — `step W2: accept`
 
@@ -207,14 +206,10 @@ a diary, rewrite.
 ## W3 · Stage
 
 **Done when** every place, person, faction, and institution in
-`stage/stage.json` is a **vignette** object with residue and a play hook.
+`stage/stage.json` answers **every** slot in `references/SPEC.md` (place,
+person, faction, institution). Counts match `lock.scale`.
 
-Load `references/SPEC.md` §Vignette. A vignette is a brief: what it is, who
-uses it, one dated proof of a Law. Not a short story and not a wiki infobox.
-
-Counts: `lock.scale` table in `references/LOCK.md` (sitting: places 10–16,
-people 8–12, factions 4–6). Mark the **entry face**. Ids live on the objects.
-Relations are ids.
+Load `SPEC.md` §Brief and §Stage. Mark the entry face. Relations are ids.
 
 **STOP** — `step W3: accept`
 
@@ -222,17 +217,10 @@ Relations are ids.
 
 ## W4 · Timeline
 
-**Done when** `timeline/timeline.json` enumerates world-key events **and**
-the story-window slice at `lock.scale` beat count, in the shape locked at W0.
+**Done when** every `story_window` beat answers the five beat slots in
+`references/SPEC.md` §Timeline, and the beat count matches `lock.scale`.
 
-Load `references/SPEC.md` §Timeline.
-
-- `linear` — dated table, residue column
-- `cyclic` — beat table: what returns, what changes
-- `concurrent` — worldline comparison table (event × line)
-
-History that does not leave residue on the stage is out. Events get ids and
-relations to places / people / factions.
+Load `SPEC.md` §Timeline. History that does not still mark today is out.
 
 **STOP** — `step W4: accept`
 
@@ -240,9 +228,8 @@ relations to places / people / factions.
 
 ## W5 · Art
 
-**Done when** `art/art.json` names the look in prose: medium matches
-`lock.look`, style_sentence + palette + light are filled, look-dev is
-resolved. **No pictures. No plate files.**
+**Done when** `art/art.json` answers every Art-look slot in `references/SPEC.md`
+(medium, style_sentence, palette, light, wardrobe, buildings). **No pictures.**
 
 Load `references/ART.md`. Do not load `imagine`. Do not call `image_gen`
 or `image_edit`. If `lock.look.source` is `inferred`, write three
@@ -283,12 +270,11 @@ them; do not start that skill's pipeline unless they asked.
 1. A teammate can quote the about-sentence, the three feelings, and the look
    why. An average American can read any paragraph once and know what it said.
    Manual voice. No fragment stacks. No unglossed coinage.
-2. Every vignette fails the swap-the-nouns test (it is only true here). Residue
-   sits under the locked surface.
-3. Every historical fact leaves residue on the playable present.
+2. Every brief answers its SPEC slots. Swap the names; if it still works, rewrite.
+3. Every older fact still does something to people in the playable present.
 4. The signature is mechanically touchable.
 5. Relations are ids that exist in the four JSON files.
-6. Art look is prose: school tell, medium, palette, light. No image files.
+6. Art look is prose, including clothes and buildings. No image files.
    Pictures are `/world-bible-pack`.
 7. Hand-edits belong in JSON. `WORLD_BIBLE.md` and `overview.html` are compile-only.
 
